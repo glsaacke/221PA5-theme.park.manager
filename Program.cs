@@ -3,11 +3,12 @@
 using System.Reflection.Metadata.Ecma335;
 using mis221_pa5_glsaacke;
 
-string menuInput = RunMenu(); //Priming read
+string menuInput = RunMenu(); 
+
 while (menuInput != "4"){
     MenuLogic(menuInput);
     Console.Clear();
-    menuInput = RunMenu(); //Update read
+    menuInput = RunMenu(); 
 }
 
 //***End Main

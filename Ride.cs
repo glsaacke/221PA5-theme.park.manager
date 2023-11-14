@@ -10,7 +10,10 @@ namespace mis221_pa5_glsaacke
         private bool operational;
 
         public Ride(int rideID, string rideName, string rideType, bool operational){
-
+            this.rideID = rideID;
+            this.rideName = rideName;
+            this.rideType = rideType;
+            this.operational = operational;
         }
 
         public int GetRideID(){
