@@ -8,6 +8,7 @@ namespace mis221_pa5_glsaacke
         private string rideName;
         private string rideType;
         private bool operational;
+        static int maxID = 0;
 
         public Ride(int rideID, string rideName, string rideType, bool operational){
             this.rideID = rideID;
@@ -19,29 +20,37 @@ namespace mis221_pa5_glsaacke
         public int GetRideID(){
             return rideID;
         }
-
         public void SetRideID(int rideID){
             this.rideID = rideID;
         }
 
+
         public string GetRideName(){
             return rideName;
         }
-
         public void SetRideName(string rideName){
             this.rideName = rideName;
         }
 
+
         public string GetRideType(){
             return rideType;
         }
-
         public void SetRideType(string rideType){
             this.rideType = rideType;
         }
 
+
         public bool ToggleOperational(bool operational){
             return !operational;
+        }
+        
+
+        public int GetMaxID(){
+            return maxID;
+        }
+        public void IncrementMaxID(){
+            maxID ++;
         }
     }
 }
