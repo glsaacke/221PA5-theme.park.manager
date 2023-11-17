@@ -86,17 +86,6 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        public void RemoveRide(Ride[] rides){
-            System.Console.WriteLine("Enter the name of the ride you would like to remove");
-            string inputName = Console.ReadLine();
-
-            int foundIndex = FindRide(inputName, rides);
-
-            rides[foundIndex].ToggleDeleted();
-        //add completed message
-
-        }
-
         public int FindRide(string inputRide, Ride[] rides){
             int foundIndex = -1;
 

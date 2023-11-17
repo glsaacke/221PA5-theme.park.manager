@@ -5,11 +5,11 @@ namespace mis221_pa5_glsaacke
         private string rideName;
         private string rideType;
 
-        private void MostRiddenRide(){
+        public void MostRiddenRide(){
 
         }
 
-        private void ActiveReservations(string rideName){
+        public void ActiveReservations(string rideName){
             
         }
 

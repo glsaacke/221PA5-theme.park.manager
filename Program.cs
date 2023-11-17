@@ -1,6 +1,7 @@
 ﻿
 
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography.X509Certificates;
 using mis221_pa5_glsaacke;
 
@@ -22,7 +23,7 @@ while (menuInput != "4"){
 
 //Gathers user menu selection
 static string RunMenu(){
-    System.Console.WriteLine("Plese select an option from the menu below:\n1. Managerial Functions\n2. Customer Functions\n3. Exit");
+    System.Console.WriteLine("Please select an option from the menu below:\n1. Managerial Functions\n2. Customer Functions\n3. Exit");
     string userInput = Console.ReadLine();
     return userInput;
 }
@@ -69,10 +70,10 @@ static void ManagerialMenu(Ride[] rides, User[] users, Utility utility, RideRepo
             utility.RemoveRide(rides);
         }
         else if(userInput == 3){
-            utility.EditRide();
+            utility.EditRide(rides);
         }
         else if(userInput == 4){
-            ReportMenu(reports);
+            ReportMenu(reports, utility);
         }
         else{
             utility.Error("Please enter a valid input");
@@ -81,8 +82,35 @@ static void ManagerialMenu(Ride[] rides, User[] users, Utility utility, RideRepo
     
 }   
 
-static void ReportMenu(RideReports reports){
-    
+static void ReportMenu(RideReports reports, Utility utility){
+    System.Console.WriteLine("Please choose from the reports below");
+    System.Console.WriteLine("1. Most ridden ride\n 2. Active reservations\n 3. Rides Completed\n4. Top five rides\n 5. Exit menu");
+    int userInput = -1;
+
+    try{
+        userInput = int.Parse(Console.ReadLine());
+    }
+    catch{
+        utility.Error("Please enter a number");
+    }
+
+    while(userInput != 5){
+        if(userInput == 1){
+            reports.MostRiddenRide();
+        }
+        else if(userInput == 2){
+            reports.ActiveReservations();
+        }
+        else if(userInput == 3){
+            reports.RidesCompleted();
+        }
+        else if(userInput == 4){
+            reports.TopFiveRides();
+        }
+        else{
+            utility.Error("Please enter a valid input")
+        }
+    }
 }
 
 static void CustomerMenu(){
