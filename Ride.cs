@@ -8,13 +8,18 @@ namespace mis221_pa5_glsaacke
         private string rideName;
         private string rideType;
         private bool operational;
+        private bool deleted;
         static int maxID = 0;
 
-        public Ride(int rideID, string rideName, string rideType, bool operational){
+        public Ride(int rideID, string rideName, string rideType, bool operational, bool deleted){
             this.rideID = rideID;
             this.rideName = rideName;
             this.rideType = rideType;
             this.operational = operational;
+            this.deleted = deleted;
+        }
+        public Ride(){
+
         }
 
         public int GetRideID(){
@@ -41,8 +46,17 @@ namespace mis221_pa5_glsaacke
         }
 
 
-        public bool ToggleOperational(bool operational){
+        public bool GetOperational(){
+            return operational;
+        }
+        public bool ToggleOperational(){
             return !operational;
+        }
+
+
+        public bool 
+        public bool ToggleDeleted(){
+            return !deleted;
         }
         
 
