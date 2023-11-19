@@ -7,7 +7,7 @@ using mis221_pa5_glsaacke;
 
 Ride[] rides = new Ride[100];
 User[] users = new User[100];
-Utility utility = new Utility();
+RideUtility utility = new RideUtility();
 RideReports reports = new RideReports();
 
 string menuInput = RunMenu(); 
@@ -29,7 +29,7 @@ static string RunMenu(){
 }
 
 //Directs program to respective methods
-static void MenuLogic(string menuInput, Ride[] rides, User[] users, Utility utility, RideReports reports){
+static void MenuLogic(string menuInput, Ride[] rides, User[] users, RideUtility utility, RideReports reports){
     if(menuInput == "1"){
         ManagerialMenu(rides, users, utility, reports);
     }
@@ -42,7 +42,7 @@ static void MenuLogic(string menuInput, Ride[] rides, User[] users, Utility util
 
 }
 
-static void ManagerialMenu(Ride[] rides, User[] users, Utility utility, RideReports reports){
+static void ManagerialMenu(Ride[] rides, User[] users, RideUtility utility, RideReports reports){
     Console.Clear();
     System.Console.WriteLine("You are now in the managerial functions menu. Please select an option below:");
     System.Console.WriteLine("1. Add a new ride to park inventory\n2. Remove a ride from park inventory\n3. Edit information about a ride\n4. Access report menu\n5. Return to home menu");
@@ -82,7 +82,7 @@ static void ManagerialMenu(Ride[] rides, User[] users, Utility utility, RideRepo
     
 }   
 
-static void ReportMenu(RideReports reports, Utility utility){
+static void ReportMenu(RideReports reports, RideUtility utility){
     System.Console.WriteLine("Please choose from the reports below");
     System.Console.WriteLine("1. Most ridden ride\n 2. Active reservations\n 3. Rides Completed\n4. Top five rides\n 5. Exit menu");
     int userInput = -1;

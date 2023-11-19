@@ -2,10 +2,10 @@ using System.Runtime.Intrinsics.Arm;
 
 namespace mis221_pa5_glsaacke
 {
-    public class Utility
+    public class RideUtility
     {
 
-        public Utility(){
+        public RideUtility(){
 
         }
 
