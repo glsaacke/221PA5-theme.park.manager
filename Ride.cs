@@ -11,14 +11,14 @@ namespace mis221_pa5_glsaacke
         private bool deleted;
         static int maxID = 0;
 
-        public Ride(int rideID, string rideName, string rideType, bool operational, bool deleted){
+        public Ride(int rideID, string rideName, string rideType, bool operational, bool deleted){ //Ride constructor
             this.rideID = rideID;
             this.rideName = rideName;
             this.rideType = rideType;
             this.operational = operational;
             this.deleted = deleted;
         }
-        public Ride(){
+        public Ride(){ //Ride no args constructor
 
         }
 
@@ -54,7 +54,6 @@ namespace mis221_pa5_glsaacke
         }
 
 
-        public bool 
         public bool ToggleDeleted(){
             return !deleted;
         }

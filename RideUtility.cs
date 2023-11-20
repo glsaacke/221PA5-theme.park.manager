@@ -9,7 +9,7 @@ namespace mis221_pa5_glsaacke
 
         }
 
-        public void AddNewRide(Ride[] rides){
+        public void AddNewRide(Ride[] rides){ //Adds a new ride to the rides array
             Console.Clear();
 
             System.Console.WriteLine("Enter the name of the new ride");
@@ -27,7 +27,7 @@ namespace mis221_pa5_glsaacke
             ride.IncrementMaxID();
         }
 
-        public void RemoveRide(Ride[] rides){
+        public void RemoveRide(Ride[] rides){ //Changes ride status to deleted
             Console.Clear();
 
             System.Console.WriteLine("Enter the name of the ride you would like to remove");
@@ -43,7 +43,7 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        public void EditRide(Ride[] rides){
+        public void EditRide(Ride[] rides){ //Edits information about a ride
             Console.Clear();
             System.Console.WriteLine("Enter the name of the ride you would like to edit");
             string inputName = Console.ReadLine();
@@ -86,7 +86,7 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        public int FindRide(string inputRide, Ride[] rides){
+        public int FindRide(string inputRide, Ride[] rides){ //Determines the position of a ride inside the array
             int foundIndex = -1;
 
             Ride ride = new Ride();

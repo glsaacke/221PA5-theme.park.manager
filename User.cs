@@ -2,35 +2,42 @@ namespace mis221_pa5_glsaacke
 {
     public class User
     {
-        private int customerID;
-        private string customerEmail;
+        private int userID;
+        private string userEmail;
         private string firstName;
         private string lastName;
-        private int age;
+        private int userAge;
+        static int maxID = 0;
 
-        public User(int customerID, string customerEmail, string firstName, string lastName, int age){
-            this.customerID = customerID;
-            this.customerEmail = customerEmail;
+        public User(int userID, string userEmail, string firstName, string lastName, int userAge){
+            this.userID = userID;
+            this.userEmail = userEmail;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.age = age;
+            this.userAge = userAge;
         }
 
-        public int GetCustomerID(){
-            return customerID;
+        public User(){} //No args User constructor
+
+        public int GetUserID(){
+            return userID;
         }
 
-        public void SetCustomerID(int customerID){
-            this.customerID = customerID;
+        public void SetUserID(int userID){
+            this.userID = userID;
         }
 
-        public string GetCustomerEmail(){
-            return customerEmail;
+
+
+        public string GetUserEmail(){
+            return userEmail;
         }
 
-        public void SetCustomerID(string customerID){
-            this.customerEmail = customerEmail;
+        public void SetUserEmail(string userID){
+            this.userEmail = userEmail;
         }
+
+
 
         public string GetFirstName(){
             return firstName;
@@ -40,6 +47,7 @@ namespace mis221_pa5_glsaacke
             this.firstName = firstName;
         }
 
+
         public string GetLastName(){
             return lastName;
         }
@@ -48,12 +56,22 @@ namespace mis221_pa5_glsaacke
             this.lastName = lastName;
         }
 
-        public int GetAge(){
-            return age;
+
+
+        public int GetUserAge(){
+            return userAge;
         }
 
-        public void SetAge(int age){
-            this.age = age;
+        public void SetUserAge(int userAge){
+            this.userAge = userAge;
+        }
+
+
+        public int GetMaxID(){
+            return maxID;
+        }
+        public void IncrementMaxID(){
+            maxID ++;
         }
         
     }
