@@ -16,12 +16,14 @@ int userVal = uUtility.LoginLogic(users);
 
 string menuInput = RunMenu(); 
 
-while (menuInput != "4"){
+while (menuInput != "3"){
 
     MenuLogic(menuInput, rides, users, rUtility, reports);
     Console.Clear();
     menuInput = RunMenu(); 
 }
+
+uUtility.UpdateUserFile(users);
 
 //***End Main
 
@@ -114,7 +116,7 @@ static void ReportMenu(RideReports reports, RideUtility rUtility){
             reports.TopFiveRides();
         }
         else{
-            rUtility.Error("Please enter a valid input")
+            rUtility.Error("Please enter a valid input");
         }
     }
 }

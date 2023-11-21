@@ -3,7 +3,7 @@ namespace mis221_pa5_glsaacke
     public class UserUtility
     {
         static int userCount = 0;
-        const int MAX_USERS = 99;
+        private const int MAX_USERS = 99;
 
         public UserUtility(){}
 
@@ -111,7 +111,7 @@ namespace mis221_pa5_glsaacke
             return check; 
         }
 
-        public void UpdateFile(User[] users){ //Overwrites text file with updated array
+        public void UpdateUserFile(User[] users){ //Overwrites text file with updated array
             StreamWriter outFile = new StreamWriter("users.txt", false);
 
             for(int i = 0; i < users.Length; i ++){

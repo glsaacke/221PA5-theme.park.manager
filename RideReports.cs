@@ -9,11 +9,11 @@ namespace mis221_pa5_glsaacke
 
         }
 
-        public void ActiveReservations(string rideName){ //Determines number of active reservations
+        public void ActiveReservations(){ //Determines number of active reservations
             
         }
 
-        public void RidesCompleted(string rideType){ //Determines expired reservations
+        public void RidesCompleted(){ //Determines expired reservations
 
         }
 

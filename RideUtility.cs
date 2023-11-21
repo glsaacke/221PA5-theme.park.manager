@@ -4,9 +4,46 @@ namespace mis221_pa5_glsaacke
 {
     public class RideUtility
     {
+        private const int MAX_RIDES = 99;
 
         public RideUtility(){
 
+        }
+
+        public void GetAllRides(Ride[] rides){
+            StreamReader inFile = new StreamReader("rides.txt");
+            int rideCount = 0;
+
+            string line; //Priming read
+            while ((line = inFile.ReadLine()) != null && rideCount < MAX_RIDES){
+                
+                string[] temp = line.Split('#');
+
+                if (temp.Length >= 5)
+                {
+                    int rideID = int.Parse(temp[0]);
+                    string rideName = temp[1];
+                    string rideType = temp[2];
+                    bool operational = false;
+                    if(temp[3] == "0"){
+                        operational = true;
+                    }
+                    bool deleted = false;
+                    if(temp[4] == "0"){
+                        deleted = true;
+                    }
+
+                    Ride ride = new Ride(rideID, rideName, rideType, operational, deleted);
+                    rides[rideCount] = ride;
+                    rideCount++;
+                }
+                //Update read in while condition
+            }
+        inFile.Close();
+        }
+
+        public void UpdateRideFile(Ride[] rides){
+            
         }
 
         public void AddNewRide(Ride[] rides){ //Adds a new ride to the rides array
