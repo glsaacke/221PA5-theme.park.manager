@@ -57,6 +57,9 @@ namespace mis221_pa5_glsaacke
         public bool ToggleDeleted(){
             return !deleted;
         }
+        public bool GetDeleted(){
+            return deleted;
+        }
         
 
         public int GetMaxID(){

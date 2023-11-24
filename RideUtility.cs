@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using System.Runtime.Intrinsics.Arm;
 
 namespace mis221_pa5_glsaacke
@@ -43,7 +44,26 @@ namespace mis221_pa5_glsaacke
         }
 
         public void UpdateRideFile(Ride[] rides){
-            
+            StreamWriter outFile = new StreamWriter("rides.txt", false);
+
+            for(int i = 0; i < rides.Length; i ++){
+                string operational = "1";
+                string deleted = "1";
+
+                Ride ride = rides[i];
+                if(ride.GetOperational() == true){
+                    operational = "0";
+                }
+
+                if(ride.GetDeleted() == true){
+                    deleted = "0";
+                }
+
+                if(ride != null){
+                    outFile.WriteLine($"{ride.GetRideID()}#{ride.GetRideName()}#{ride.GetRideType()}#{operational}#{deleted}");
+                }
+            }
+            outFile.Close();
         }
 
         public void AddNewRide(Ride[] rides){ //Adds a new ride to the rides array
