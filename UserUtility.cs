@@ -15,7 +15,7 @@ namespace mis221_pa5_glsaacke
             System.Console.WriteLine("Please enter your last name");
             string userLastName = Console.ReadLine().ToUpper();
 
-            int count = GetUsersFromFile(users);
+            int count = GetAllUsers(users);
             int check = 0;
             int userVal = 0;
             userCount += count;
@@ -44,7 +44,7 @@ namespace mis221_pa5_glsaacke
             return userVal;
         }
 
-        public int GetUsersFromFile(User[] users){ //Imports user data from file to array
+        public int GetAllUsers(User[] users){ //Imports user data from file to array
             int userCount = 0;
 
             StreamReader inFile = new StreamReader("users.txt");

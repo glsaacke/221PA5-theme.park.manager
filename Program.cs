@@ -11,8 +11,10 @@ RideUtility rUtility = new RideUtility();
 RideReports reports = new RideReports();
 UserUtility uUtility = new UserUtility();
 
-uUtility.GetUsersFromFile(users);
+uUtility.GetAllUsers(users);
 int userVal = uUtility.LoginLogic(users);
+
+rUtility.GetAllRides(rides);
 
 string menuInput = RunMenu(); 
 
