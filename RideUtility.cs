@@ -43,7 +43,25 @@ namespace mis221_pa5_glsaacke
         }
 
         public void UpdateRideFile(Ride[] rides){
-            
+            StreamWriter outFile = new StreamWriter("rides.txt", false);
+
+            for(int i = 0; i < rides.Length; i ++){
+                string operational = "1";
+                string deleted = "1";
+
+                Ride ride = rides[i];
+
+                if(ride != null){
+                    if(ride.GetOperational()){
+                        operational = "0";
+                    }
+                    if(ride.GetDeleted()){
+                        deleted = "0";
+                    }
+                    outFile.WriteLine($"{ride.GetRideID()}#{ride.GetRideName()}#{ride.GetRideType()}#{operational}#{deleted}");
+                }
+            }
+            outFile.Close();
         }
 
         public void AddNewRide(Ride[] rides){ //Adds a new ride to the rides array
@@ -57,11 +75,17 @@ namespace mis221_pa5_glsaacke
 
             Ride ride = new Ride();
 
-            Ride myRide = new Ride(ride.GetMaxID(), inputName, inputType, true, true);
+            Ride myRide = new Ride(ride.GetMaxID(), inputName, inputType, true, false);
 
             rides[ride.GetMaxID()] = myRide;
 
             ride.IncrementMaxID();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            System.Console.WriteLine("New ride added!");
+            Console.ResetColor();
+            System.Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
         }
 
         public void RemoveRide(Ride[] rides){ //Changes ride status to deleted

@@ -24,6 +24,7 @@ while (menuInput != "3"){
 }
 
 uUtility.UpdateUserFile(users);
+rUtility.UpdateRideFile(rides);
 
 //***End Main
 
@@ -51,24 +52,22 @@ static void MenuLogic(string menuInput, Ride[] rides, User[] users, RideUtility 
 //Directs program to respective managerial options
 static void ManagerialMenu(Ride[] rides, User[] users, RideUtility rUtility, RideReports reports){
     Console.Clear();
-    System.Console.WriteLine("You are now in the managerial functions menu. Please select an option below:");
-    System.Console.WriteLine("1. Add a new ride to park inventory\n2. Remove a ride from park inventory\n3. Edit information about a ride\n4. Access report menu\n5. Return to home menu");
-    int check = 0; //Priming read
     int userInput = -1;
-
-
-
-    while(check == 0){
-        try{
-            userInput = int.Parse(Console.ReadLine());
-            check = 1; //Update read
-        }
-        catch{
-            rUtility.Error("Please enter a number");
-        }
-    }
-
     while(userInput != 5){
+        Console.Clear();
+        System.Console.WriteLine("You are now in the managerial functions menu. Please select an option below:");
+        System.Console.WriteLine("1. Add a new ride to park inventory\n2. Remove a ride from park inventory\n3. Edit information about a ride\n4. Access report menu\n5. Return to home menu");
+        int check = 0; //Priming read
+
+        while(check == 0){
+            try{
+                userInput = int.Parse(Console.ReadLine());
+                check = 1; //Update read
+            }
+            catch{
+                rUtility.Error("Please enter a number");
+            }
+        }
 
         if(userInput == 1){
             rUtility.AddNewRide(rides);
@@ -86,7 +85,6 @@ static void ManagerialMenu(Ride[] rides, User[] users, RideUtility rUtility, Rid
             rUtility.Error("Please enter a valid input");
         }
     }
-    
 }   
 
 //Directs program to respective reports

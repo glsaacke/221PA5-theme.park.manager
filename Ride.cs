@@ -54,6 +54,9 @@ namespace mis221_pa5_glsaacke
         }
 
 
+        public bool GetDeleted(){
+            return deleted;
+        }
         public bool ToggleDeleted(){
             return !deleted;
         }
