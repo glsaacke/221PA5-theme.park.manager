@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Net.NetworkInformation;
 
 namespace mis221_pa5_glsaacke
@@ -12,7 +13,9 @@ namespace mis221_pa5_glsaacke
        private string rideType;
        private string reservationDate;
        private bool cancelled;
+       public int maxInteractionID = 0;
     
+        public Reservation(){}
         public Reservation(int interactionID, string customerEmail, int rideID, string rideName, string rideType, string reservationDate, bool cancelled){
             this.interactionID = interactionID;
             this.customerEmail = customerEmail;
@@ -22,5 +25,47 @@ namespace mis221_pa5_glsaacke
             this.reservationDate = reservationDate;
             this.cancelled = cancelled;
         }
+
+        public int GetMaxInteractionID(){
+            return maxInteractionID;
+        }
+        public void IncrementInteractionID(){
+            maxInteractionID++;
+        }
+
+        public int GetInteractionID(){
+            return interactionID;
+        }
+
+        public string GetCustEmail(){
+            return customerEmail;
+        }
+
+        public int GetRideID(){
+            return rideID;
+        }
+
+        public string GetRideName(){
+            return rideName;
+        }
+
+        public string GetRideType(){
+            return rideType;
+        }
+
+
+        public string GetReservationDate(){
+            return reservationDate;
+        }
+
+        public bool GetCancelled(){
+            return cancelled;
+        }
+        public void ToggleCancelled(){
+            cancelled = !cancelled;
+        }
+        
+
+        
     }
 }

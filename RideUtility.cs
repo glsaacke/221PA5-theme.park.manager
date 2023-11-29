@@ -11,7 +11,7 @@ namespace mis221_pa5_glsaacke
 
         }
 
-        public void GetAllRides(Ride[] rides){
+        static public void GetAllRides(Ride[] rides){
             StreamReader inFile = new StreamReader("rides.txt");
             int rideCount = 0;
 
@@ -43,7 +43,7 @@ namespace mis221_pa5_glsaacke
         inFile.Close();
         }
 
-        public void UpdateRideFile(Ride[] rides){
+        static public void UpdateRideFile(Ride[] rides){
             StreamWriter outFile = new StreamWriter("rides.txt", false);
 
             for(int i = 0; i < rides.Length; i ++){
@@ -65,7 +65,7 @@ namespace mis221_pa5_glsaacke
             outFile.Close();
         }
 
-        public void AddNewRide(Ride[] rides){ //Adds a new ride to the rides array
+        static public void AddNewRide(Ride[] rides){ //Adds a new ride to the rides array
             Console.Clear();
 
             System.Console.WriteLine("Enter the name of the new ride");
@@ -89,7 +89,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        public void RemoveRide(Ride[] rides){ //Changes ride status to deleted
+        static public void RemoveRide(Ride[] rides){ //Changes ride status to deleted
             Console.Clear();
 
             System.Console.WriteLine("Enter the name of the ride you would like to remove");
@@ -105,7 +105,7 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        public void EditRide(Ride[] rides){ //Edits information about a ride
+        static public void EditRide(Ride[] rides){ //Edits information about a ride
             Console.Clear();
             System.Console.WriteLine("Enter the name of the ride you would like to edit");
             string inputName = Console.ReadLine();
@@ -148,7 +148,7 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        public int FindRide(string inputRide, Ride[] rides){ //Determines the position of a ride inside the array
+        static public int FindRide(string inputRide, Ride[] rides){ //Determines the position of a ride inside the array
             int foundIndex = -1;
 
             Ride ride = new Ride();
@@ -162,10 +162,18 @@ namespace mis221_pa5_glsaacke
             return foundIndex;
         }
 
-        public void Error(string errorMessage){
+        public void ViewAllRides(Ride[] rides){
+
+        }
+
+        static public void Error(string errorMessage){
             Console.ForegroundColor = ConsoleColor.Red;
             System.Console.WriteLine("Error: " + errorMessage);
             Console.ResetColor();
+        }
+
+        public void ViewAllRides(){
+            
         }
     }
 }

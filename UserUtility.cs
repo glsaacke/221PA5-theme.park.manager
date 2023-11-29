@@ -7,7 +7,7 @@ namespace mis221_pa5_glsaacke
 
         public UserUtility(){}
 
-        public int LoginLogic(User[] users){ //Determines user position or adds new user to system
+        static public int LoginLogic(User[] users){ //Determines user position or adds new user to system
 
             System.Console.WriteLine("Login: Please enter your first name");
             string userFirstName = Console.ReadLine().ToUpper();
@@ -44,7 +44,7 @@ namespace mis221_pa5_glsaacke
             return userVal;
         }
 
-        public int GetAllUsers(User[] users){ //Imports user data from file to array
+        static public int GetAllUsers(User[] users){ //Imports user data from file to array
             int userCount = 0;
 
             StreamReader inFile = new StreamReader("users.txt");
@@ -74,7 +74,7 @@ namespace mis221_pa5_glsaacke
         }
 
 
-        private bool CompareNames(string name1, string name2){ //Compares user data 
+        static private bool CompareNames(string name1, string name2){ //Compares user data 
 
             if(name1 == name2){
                     return true;
@@ -84,7 +84,7 @@ namespace mis221_pa5_glsaacke
                 }
         }
 
-        private void AddUser(User[] users, string userFirstName, string userLastName){ //Adds a new user to the array
+        static private void AddUser(User[] users, string userFirstName, string userLastName){ //Adds a new user to the array
             User temp = new User();
             System.Console.WriteLine("Welcome new user!");
             System.Console.WriteLine("Please enter your email");
@@ -97,7 +97,7 @@ namespace mis221_pa5_glsaacke
             user.IncrementMaxID();
         }
 
-        public int SearchUser(User[] users, string userFirstName, string userLastName, int userCount){ //Determines if a user exists
+        static public int SearchUser(User[] users, string userFirstName, string userLastName, int userCount){ //Determines if a user exists
             int check = 0;
 
             for (int i = 0; i < userCount; i++){
@@ -111,7 +111,11 @@ namespace mis221_pa5_glsaacke
             return check; 
         }
 
-        public void UpdateUserFile(User[] users){ //Overwrites text file with updated array
+        public void EditAccountInfo(User[] users){
+
+        }
+
+        static public void UpdateUserFile(User[] users){ //Overwrites text file with updated array
             StreamWriter outFile = new StreamWriter("users.txt", false);
 
             for(int i = 0; i < users.Length; i ++){
