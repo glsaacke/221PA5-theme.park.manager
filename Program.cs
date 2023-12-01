@@ -15,6 +15,7 @@ ReserveUtility resUtility = new ReserveUtility();
 
 UserUtility.GetAllUsers(users);
 int userVal = UserUtility.LoginLogic(users);
+User currentUser = users[userVal];
 
 RideUtility.GetAllRides(rides);
 
@@ -22,7 +23,7 @@ string menuInput = RunMenu();
 
 while (menuInput != "3"){
 
-    MenuLogic(menuInput, rides, users, reservations, rUtility, uUtility, resUtility, reports, userVal);
+    MenuLogic(menuInput, rides, users, reservations, rUtility, uUtility, resUtility, reports, currentUser);
     Console.Clear();
     menuInput = RunMenu(); 
 }
@@ -40,12 +41,12 @@ static string RunMenu(){
 }
 
 //Directs program to respective methods
-static void MenuLogic(string menuInput, Ride[] rides, User[] users, Reservation[] reservations, RideUtility rUtility, UserUtility uUtility, ReserveUtility resUtility, RideReports reports, int userVal){
+static void MenuLogic(string menuInput, Ride[] rides, User[] users, Reservation[] reservations, RideUtility rUtility, UserUtility uUtility, ReserveUtility resUtility, RideReports reports, User currentUser){
     if(menuInput == "1"){
         ManagerialMenu(rides, users, rUtility, reports);
     }
     else if(menuInput == "2"){
-        CustomerMenu(uUtility, rUtility, resUtility, users, rides, reservations, userVal);
+        CustomerMenu(uUtility, rUtility, resUtility, users, rides, reservations, currentUser);
     }
     else{
         RideUtility.Error("Please enter a valid input");
@@ -124,7 +125,7 @@ static void ReportMenu(RideReports reports, RideUtility rUtility){
 }
 
 //Directs program to respective customer options
-static void CustomerMenu(UserUtility uUtility, RideUtility rUtility, ReserveUtility resUtility, User[] users, Ride[] rides, Reservation[] reservations, int userVal){
+static void CustomerMenu(UserUtility uUtility, RideUtility rUtility, ReserveUtility resUtility, User[] users, Ride[] rides, Reservation[] reservations, User currentUser){
     Console.Clear();
     int userInput = -1;
 
@@ -147,16 +148,16 @@ static void CustomerMenu(UserUtility uUtility, RideUtility rUtility, ReserveUtil
             rUtility.ViewAllRides(rides);
         }
         else if(userInput == 2){
-            resUtility.ReserveRide(rides, reservations, users, userVal);
+            resUtility.ReserveRide(rides, reservations, currentUser);
         }
         else if(userInput == 3){
-            resUtility.RideHistory(reservations, users, userVal);
+            resUtility.RideHistory(reservations, currentUser);
         }
         else if(userInput == 4){
-            uUtility.EditAccountInfo(users);
+            uUtility.EditAccountInfo(users); //Write method
         }
         else if(userInput == 5){
-            resUtility.CancelReservation(reservations);
+            resUtility.CancelReservation(reservations, currentUser); //Edit date config
         }
         else{
             RideUtility.Error("Please enter a valid input");

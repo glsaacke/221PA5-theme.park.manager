@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace mis221_pa5_glsaacke
 {
     public class ReserveUtility
@@ -36,7 +38,7 @@ namespace mis221_pa5_glsaacke
         inFile.Close();
         }
 
-        public void ReserveRide(Ride[] rides, Reservation[] reservations, User[] users, int userVal){
+        public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){
             System.Console.WriteLine("Please enter the name of the ride you would like to reserve");
             string rideName = Console.ReadLine();
             System.Console.WriteLine("Please enter the date you would like to reserve\nEx: March 3");
@@ -47,14 +49,14 @@ namespace mis221_pa5_glsaacke
             Reservation temp = new Reservation();
             RideUtility rUtility = new RideUtility();
 
-            int rideVal = rUtility.FindRide(rideName, rides);
+            int rideVal = RideUtility.FindRide(rideName, rides);
 
-            Reservation myReservation = new Reservation(temp.GetMaxInteractionID(), users[userVal].GetUserEmail(), rides[rideVal].GetRideID(), rideName, rides[rideVal].GetRideType(), date + time, false);
+            Reservation myReservation = new Reservation(temp.GetMaxInteractionID(), currentUser.GetUserEmail(), rides[rideVal].GetRideID(), rideName, rides[rideVal].GetRideType(), date + time, false);
 
         }
 
-        public void RideHistory(Reservation[] reservations, User[] users, int userVal){
-            string custEmail = users[userVal].GetUserEmail();
+        public void RideHistory(Reservation[] reservations, User currentUser){
+            string custEmail = currentUser.GetUserEmail();
 
             System.Console.WriteLine("Here are the past reservations under your email: " + custEmail);
 
@@ -68,12 +70,40 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        public void CancelReservation(Reservation[] reservations){
+        public void CancelReservation(Reservation[] reservations, User currentUser){
             System.Console.WriteLine("Here are your active reservations");
+            int check = 0;
 
             foreach(Reservation r in reservations){
-                if 
+                if(r.GetCustEmail() == currentUser.GetUserEmail()){
+                    System.Console.WriteLine($"{r.GetRideName()} {r.GetReservationDate()}");
+                }
             }
+            while(check == 0){
+                System.Console.WriteLine("Enter the ride you would like to cancel");
+                string rideInput = Console.ReadLine();
+
+                System.Console.WriteLine("Enter the date you would like to cancel on");
+                string dateInput = Console.ReadLine();
+
+                foreach(Reservation r in reservations){
+                    if(rideInput == r.GetRideName() && dateInput == r.GetReservationDate()){
+                        r.ToggleCancelled();
+                        check = 1;
+                    }
+                }
+
+                if(check == 0){
+                    RideUtility.Error("Reservation does not exist. Check input and try again");
+                }
+            }
+
+            System.Console.WriteLine("Reservation sucessfully cancelled!\nPress any key to continue");
+            Console.ReadKey();
+        }
+
+        static public void SortReservationArray(){
+            
         }
     }
 }

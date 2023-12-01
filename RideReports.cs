@@ -5,19 +5,27 @@ namespace mis221_pa5_glsaacke
         private string rideName;
         private string rideType;
 
-        public void MostRiddenRide(){ //Returns the most ridden ride
+        static public void MostRiddenRide(Reservation[] reservations){ //Returns the most ridden ride
+            Console.Clear();
+            System.Console.WriteLine("Calculating the most ridden ride");
 
+            ReserveUtility.SortReservationArray(reservations); //Build out method
+
+            string rideName = reservations[0].GetRideName();
+            for(int i = 0; i < reservations.Length; i++){
+                
+            }
         }
 
-        public void ActiveReservations(){ //Determines number of active reservations
+        static public void ActiveReservations(){ //Determines number of active reservations
             
         }
 
-        public void RidesCompleted(){ //Determines expired reservations
+        static public void RidesCompleted(){ //Determines expired reservations
 
         }
 
-        public void TopFiveRides(){ //Determines the top 5 rides based on reservation
+        static public void TopFiveRides(){ //Determines the top 5 rides based on reservation
             
         }
     }

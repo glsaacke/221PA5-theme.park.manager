@@ -1,4 +1,5 @@
 using System.Net.NetworkInformation;
+using System.Reflection.Metadata;
 using System.Runtime.Intrinsics.Arm;
 
 namespace mis221_pa5_glsaacke
@@ -160,6 +161,12 @@ namespace mis221_pa5_glsaacke
                 }
             }
             return foundIndex;
+        }
+
+        static public void SortRideArray(Ride[] rides){
+            for(int i = 0; i < rides.Length; i++){
+                
+            }
         }
 
         public void ViewAllRides(Ride[] rides){
