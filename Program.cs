@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using mis221_pa5_glsaacke;
 
 Ride[] rides = new Ride[100];
-User[] users = new User[100];
+User[] users = new User[100]; //TODO clear instance junk
 Reservation[] reservations = new Reservation[100];
 RideUtility rUtility = new RideUtility();
 RideReports reports = new RideReports();
@@ -32,7 +32,7 @@ UserUtility.UpdateUserFile(users);
 RideUtility.UpdateRideFile(rides);
 
 //***End Main
-
+//TODO label all methods
 //Gathers user menu selection
 static string RunMenu(){
     System.Console.WriteLine("Please select an option from the menu below:\n1. Managerial Functions\n2. Customer Functions\n3. Exit");
@@ -55,7 +55,7 @@ static void MenuLogic(string menuInput, Ride[] rides, User[] users, Reservation[
 }
 
 //Directs program to respective managerial options
-static void ManagerialMenu(Ride[] rides, User[] users, RideUtility rUtility, RideReports reports){
+static void ManagerialMenu(Ride[] rides, User[] users, RideUtility rUtility, RideReports reports){ //TODO **EXTRA add login/password system
     Console.Clear();
     int userInput = -1;
     while(userInput != 5){
@@ -105,7 +105,7 @@ static void ReportMenu(RideReports reports, RideUtility rUtility){
         RideUtility.Error("Please enter a number");
     }
 
-    while(userInput != 5){
+    while(userInput != 5){ //TODO fix report method calls
         if(userInput == 1){
             reports.MostRiddenRide();
         }

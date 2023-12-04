@@ -24,19 +24,22 @@ namespace mis221_pa5_glsaacke
                     string rideName = temp[3];
                     string rideType = temp[4];
                     string reservationDate = temp[5];
-                    bool cancelled = false;
+                    bool active = false;
                     if(temp[6] == "0"){
-                        cancelled = true;
+                        active = true;
                     }
 
-                    Reservation myReservation = new Reservation(interactionID, custEmail, rideID, rideName, rideType, reservationDate, cancelled);
+                    Reservation myReservation = new Reservation(interactionID, custEmail, rideID, rideName, rideType, reservationDate, active);
                     reservations[reservationCount] = myReservation;
                     reservationCount++;
                 }
+                Reservation.reservationCount++;
                 //Update read in while condition
             }
         inFile.Close();
         }
+
+        //TODO add array export method
 
         public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){
             System.Console.WriteLine("Please enter the name of the ride you would like to reserve");
@@ -102,8 +105,24 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void SortReservationArray(){
-            
+        static public void SortReservationArray(Reservation[] reservations){
+            string rideName = reservations[0].GetRideName();
+
+            for(int i = 0; i < Reservation.reservationCount; i++){
+                int index = i;
+
+                for(int j = i + 1; j < Reservation.reservationCount; j++){
+                    if(string.Compare(reservations[j].GetRideName(), reservations[i].GetRideName()) < 0){
+                        index = j;
+                    }
+                }
+
+                if(index != i){
+                    Reservation temp = reservations[i];
+                    reservations[i] = reservations[index];
+                    reservations[index] = temp;
+                }
+            }
         }
     }
 }
