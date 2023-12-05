@@ -16,14 +16,14 @@ namespace mis221_pa5_glsaacke
                 
                 string[] temp = line.Split('#');
 
-                if (temp.Length >= 5)
+                if (temp.Length >= 7)
                 {
                     int interactionID = int.Parse(temp[0]);
                     string custEmail = temp[1];
                     int rideID = int.Parse(temp[2]);
                     string rideName = temp[3];
                     string rideType = temp[4];
-                    string reservationDate = temp[5];
+                    DateTime reservationDate = DateTime.ParseExact(temp[5], "MM/dd/yyyy HH:mm:ss", null);
                     bool active = false;
                     if(temp[6] == "0"){
                         active = true;
@@ -39,26 +39,62 @@ namespace mis221_pa5_glsaacke
         inFile.Close();
         }
 
-        //TODO add array export method
+        static public void UpdateReservationFile(Reservation[] reservations){
+            StreamWriter outFile = new StreamWriter("reservations.txt", false);
 
-        public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){
-            System.Console.WriteLine("Please enter the name of the ride you would like to reserve");
-            string rideName = Console.ReadLine();
-            System.Console.WriteLine("Please enter the date you would like to reserve\nEx: March 3");
-            string date = Console.ReadLine();
-            System.Console.WriteLine("Please enter the time you would like to reserve");
-            string time = Console.ReadLine();
+            for(int i = 0; i < Reservation.reservationCount; i ++){
+                string cancelled = "1";
 
-            Reservation temp = new Reservation();
-            RideUtility rUtility = new RideUtility();
+                Reservation reservation = reservations[i];
 
-            int rideVal = RideUtility.FindRide(rideName, rides);
+                if(reservation != null){
+                    if(reservation.GetCancelled()){
+                        cancelled = "0";
+                    }
+                    outFile.WriteLine($"{reservation.GetInteractionID()}#{reservation.GetCustEmail()}#{reservation.GetRideID()}#{reservation.GetRideName()}#{reservation.GetRideType()}#{reservation.GetReservationDate().ToString("MM/dd/yyyy HH:mm:ss")}#{cancelled}");
+                }
+            }
+            outFile.Close();
+        }
 
-            Reservation myReservation = new Reservation(temp.GetMaxInteractionID(), currentUser.GetUserEmail(), rides[rideVal].GetRideID(), rideName, rides[rideVal].GetRideType(), date + time, false);
+        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){
+            int check = 0;
+
+            while(check == 0){
+                try{
+                    System.Console.WriteLine("Please enter the name of the ride you would like to reserve");
+                    string rideName = Console.ReadLine();
+
+                    System.Console.WriteLine("Please enter the date you would like to reserve in mm/dd/yyyy format");
+                    string userDate = Console.ReadLine();
+                    string[] dates = userDate.Split('/');
+
+                    System.Console.WriteLine("Please enter the time you would like to reserve in hh:mm format");
+                    string userTime = Console.ReadLine();
+                    string[] times = userTime.Split(':');
+
+                    DateTime dateTime = new DateTime(int.Parse(dates[2]), int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(times[0]), int.Parse(times[1]), 0);
+
+                    Reservation temp = new Reservation();
+
+                    int rideVal = RideUtility.FindRide(rideName, rides);
+
+                    Reservation myReservation = new Reservation(temp.GetMaxInteractionID(), currentUser.GetUserEmail(), rides[rideVal].GetRideID(), rideName, rides[rideVal].GetRideType(), dateTime, false);
+
+                    check = 1;
+                }
+                catch{
+                    RideUtility.Error("Error: invalid input. Please try again");
+                }
+            }
+            System.Console.WriteLine("Ride reserved!");
+            System.Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+
 
         }
 
-        public void RideHistory(Reservation[] reservations, User currentUser){
+        static public void RideHistory(Reservation[] reservations, User currentUser){
             string custEmail = currentUser.GetUserEmail();
 
             System.Console.WriteLine("Here are the past reservations under your email: " + custEmail);
@@ -73,35 +109,57 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        public void CancelReservation(Reservation[] reservations, User currentUser){
-            System.Console.WriteLine("Here are your active reservations");
+        static public void CancelReservation(Reservation[] reservations, User currentUser){
+            Console.Clear();
             int check = 0;
 
-            foreach(Reservation r in reservations){
-                if(r.GetCustEmail() == currentUser.GetUserEmail()){
-                    System.Console.WriteLine($"{r.GetRideName()} {r.GetReservationDate()}");
-                }
-            }
             while(check == 0){
-                System.Console.WriteLine("Enter the ride you would like to cancel");
-                string rideInput = Console.ReadLine();
+                System.Console.WriteLine("Enter the ride you would like to cancel a reservation for");
+                string rideInput = Console.ReadLine().ToUpper();
+                string indexConcat = "";
+                int check2 = 0;
+                int check3 = 0;
+                string reservationIndex = "";
 
-                System.Console.WriteLine("Enter the date you would like to cancel on");
-                string dateInput = Console.ReadLine();
-
-                foreach(Reservation r in reservations){
-                    if(rideInput == r.GetRideName() && dateInput == r.GetReservationDate()){
-                        r.ToggleCancelled();
-                        check = 1;
+                for(int i = 0; i < Reservation.reservationCount; i++){
+                    if(rideInput == reservations[i].GetRideName() && reservations[i].GetCustEmail() == currentUser.GetUserEmail()){
+                        System.Console.WriteLine($"{i}. {rideInput} reservation on {reservations[i].GetReservationDate().ToString("MM/dd/yyyy HH:mm")}");
+                        indexConcat += $"{i},";                    
                     }
                 }
 
-                if(check == 0){
-                    RideUtility.Error("Reservation does not exist. Check input and try again");
+                if(indexConcat == ""){
+                    check2 = 1;
+                    System.Console.WriteLine("You have no current reservations for " + rideInput);
+                }
+
+                string[] options = indexConcat.Split(',');
+
+                while(check2 == 0){
+                    System.Console.WriteLine("\nPlease enter the number of the reservation you would like to cancel");
+
+                    while(check3 == 0){
+                        string indexInput = Console.ReadLine();
+
+                        for(int i = 0; i < options.Length; i++){
+                            if(options[i] == indexInput){
+                                reservationIndex = indexInput;
+                                check3 = 1;
+                            }
+                        }
+
+                        if(check3 == 0){
+                            RideUtility.Error("Error: Please enter a number from the above results");
+                        }
+                    }
+                
+                    reservations[int.Parse(reservationIndex)].ToggleCancelled();
+
+                    System.Console.WriteLine("Reservation sucessfully cancelled!");
                 }
             }
 
-            System.Console.WriteLine("Reservation sucessfully cancelled!\nPress any key to continue");
+            System.Console.WriteLine("Press any key to continue");
             Console.ReadKey();
         }
 

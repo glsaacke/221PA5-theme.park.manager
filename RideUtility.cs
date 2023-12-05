@@ -60,7 +60,7 @@ namespace mis221_pa5_glsaacke
                     if(ride.GetDeleted()){
                         deleted = "0";
                     }
-                    outFile.WriteLine($"{ride.GetRideID()}#{ride.GetRideName()}#{ride.GetRideType()}#{operational}#{deleted}");
+                    outFile.WriteLine($"{ride.GetRideID()}#{ride.GetRideName().ToUpper()}#{ride.GetRideType().ToUpper()}#{operational}#{deleted}");
                 }
             }
             outFile.Close();
@@ -169,7 +169,7 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        public void ViewAllRides(Ride[] rides){
+        static public void ViewAllRides(Ride[] rides){
 
         }
 

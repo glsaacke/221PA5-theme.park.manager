@@ -33,7 +33,7 @@ namespace mis221_pa5_glsaacke
             return userEmail;
         }
 
-        public void SetUserEmail(string userID){
+        public void SetUserEmail(string userEmail){
             this.userEmail = userEmail;
         }
 

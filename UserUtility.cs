@@ -1,3 +1,6 @@
+using System.Runtime.Intrinsics.Arm;
+using Microsoft.VisualBasic;
+
 namespace mis221_pa5_glsaacke
 {
     public class UserUtility
@@ -111,8 +114,57 @@ namespace mis221_pa5_glsaacke
             return check; 
         }
 
-        public void EditAccountInfo(User[] users){
+        static public void EditAccountInfo(User[] users, User currentUser, int userVal){
+            Console.Clear();
+            System.Console.WriteLine("Welcome to the account edit interface. Select what you would like to change\n1. Email\n2. First name\n3. Last name\n4. Age\n 5. Return");
+            int check = 0;
+            int userInput = -1;
 
+            while(check == 0){
+                try{
+                    userInput = int.Parse(Console.ReadLine());
+                    check = 1;
+                }
+                catch{
+                    RideUtility.Error("Error: Please enter a number from the above list");
+                }
+            }
+
+            if(userInput != 5){
+                if(userInput == 1){
+                    System.Console.WriteLine("Enter your updated email");
+                    users[userVal].SetUserEmail(Console.ReadLine());
+                }
+                else if(userInput == 2){
+                    System.Console.WriteLine("Enter your updated first name");
+                    users[userVal].SetFirstName(Console.ReadLine());
+                }
+                else if(userInput == 3){
+                    System.Console.WriteLine("Enter your updated last name");
+                    users[userVal].SetLastName(Console.ReadLine());
+                }
+                else if(userInput == 4){
+                    System.Console.WriteLine("Enter your updated age");
+                    int check2 = 0;
+                    while(check2 == 0){
+                        try{
+                            users[userVal].SetUserAge(int.Parse(Console.ReadLine()));
+                            check2 = 1;
+                        }
+                        catch{
+                            RideUtility.Error("Error: Please enter a number");
+                        }
+                    }
+                }
+                else{
+                    if(userInput != 5){
+                        RideUtility.Error("Please enter a number from the above list");
+                    }
+                }
+                System.Console.WriteLine("User information updated!");
+            }
+            System.Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
         }
 
         static public void UpdateUserFile(User[] users){ //Overwrites text file with updated array

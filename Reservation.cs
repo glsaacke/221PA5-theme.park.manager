@@ -11,20 +11,20 @@ namespace mis221_pa5_glsaacke
        private int rideID;
        private string rideName;
        private string rideType;
-       private string reservationDate;
-       private bool active;
+       private DateTime reservationDate;
+       private bool cancelled;
        public int maxInteractionID = 0;
        static public int reservationCount;
     
         public Reservation(){}
-        public Reservation(int interactionID, string customerEmail, int rideID, string rideName, string rideType, string reservationDate, bool active){
+        public Reservation(int interactionID, string customerEmail, int rideID, string rideName, string rideType, DateTime reservationDate, bool cancelled){
             this.interactionID = interactionID;
             this.customerEmail = customerEmail;
             this.rideID = rideID;
             this.rideName = rideName;
             this.rideType = rideType;
             this.reservationDate = reservationDate;
-            this.active = active;
+            this.cancelled = cancelled;
         }
 
         public int GetMaxInteractionID(){
@@ -55,15 +55,15 @@ namespace mis221_pa5_glsaacke
         }
 
 
-        public string GetReservationDate(){
+        public DateTime GetReservationDate(){
             return reservationDate;
         }
 
-        public bool GetActive(){
-            return active;
+        public bool GetCancelled(){
+            return cancelled;
         }
-        public void ToggleActive(){
-            active = !active;
+        public void ToggleCancelled(){
+         cancelled =  cancelled;
         }
         
 

@@ -6,12 +6,8 @@ using System.Security.Cryptography.X509Certificates;
 using mis221_pa5_glsaacke;
 
 Ride[] rides = new Ride[100];
-User[] users = new User[100]; //TODO clear instance junk
+User[] users = new User[100];
 Reservation[] reservations = new Reservation[100];
-RideUtility rUtility = new RideUtility();
-RideReports reports = new RideReports();
-UserUtility uUtility = new UserUtility();
-ReserveUtility resUtility = new ReserveUtility();
 
 UserUtility.GetAllUsers(users);
 int userVal = UserUtility.LoginLogic(users);
@@ -23,7 +19,7 @@ string menuInput = RunMenu();
 
 while (menuInput != "3"){
 
-    MenuLogic(menuInput, rides, users, reservations, rUtility, uUtility, resUtility, reports, currentUser);
+    MenuLogic(menuInput, rides, users, reservations, currentUser, userVal);
     Console.Clear();
     menuInput = RunMenu(); 
 }
@@ -41,12 +37,12 @@ static string RunMenu(){
 }
 
 //Directs program to respective methods
-static void MenuLogic(string menuInput, Ride[] rides, User[] users, Reservation[] reservations, RideUtility rUtility, UserUtility uUtility, ReserveUtility resUtility, RideReports reports, User currentUser){
+static void MenuLogic(string menuInput, Ride[] rides, User[] users, Reservation[] reservations, User currentUser, int userVal){
     if(menuInput == "1"){
-        ManagerialMenu(rides, users, rUtility, reports);
+        ManagerialMenu(rides, users, reservations);
     }
     else if(menuInput == "2"){
-        CustomerMenu(uUtility, rUtility, resUtility, users, rides, reservations, currentUser);
+        CustomerMenu(users, rides, reservations, currentUser, userVal);
     }
     else{
         RideUtility.Error("Please enter a valid input");
@@ -55,7 +51,7 @@ static void MenuLogic(string menuInput, Ride[] rides, User[] users, Reservation[
 }
 
 //Directs program to respective managerial options
-static void ManagerialMenu(Ride[] rides, User[] users, RideUtility rUtility, RideReports reports){ //TODO **EXTRA add login/password system
+static void ManagerialMenu(Ride[] rides, User[] users, Reservation[] reservations){ //TODO **EXTRA add login/password system
     Console.Clear();
     int userInput = -1;
     while(userInput != 5){
@@ -84,7 +80,7 @@ static void ManagerialMenu(Ride[] rides, User[] users, RideUtility rUtility, Rid
             RideUtility.EditRide(rides);
         }
         else if(userInput == 4){
-            ReportMenu(reports, rUtility);
+            ReportMenu(reservations);
         }
         else{
             RideUtility.Error("Please enter a valid input");
@@ -93,7 +89,7 @@ static void ManagerialMenu(Ride[] rides, User[] users, RideUtility rUtility, Rid
 }   
 
 //Directs program to respective reports
-static void ReportMenu(RideReports reports, RideUtility rUtility){
+static void ReportMenu(Reservation[] reservations){
     System.Console.WriteLine("Please choose from the reports below");
     System.Console.WriteLine("1. Most ridden ride\n 2. Active reservations\n 3. Rides Completed\n4. Top five rides\n 5. Exit menu");
     int userInput = -1;
@@ -105,18 +101,18 @@ static void ReportMenu(RideReports reports, RideUtility rUtility){
         RideUtility.Error("Please enter a number");
     }
 
-    while(userInput != 5){ //TODO fix report method calls
+    while(userInput != 5){
         if(userInput == 1){
-            reports.MostRiddenRide();
+            RideReports.MostRiddenRide(reservations);
         }
         else if(userInput == 2){
-            reports.ActiveReservations();
+            RideReports.ActiveReservations(reservations);
         }
         else if(userInput == 3){
-            reports.RidesCompleted();
+            RideReports.RidesCompleted(reservations);
         }
         else if(userInput == 4){
-            reports.TopFiveRides();
+            RideReports.TopFiveRides(reservations);
         }
         else{
             RideUtility.Error("Please enter a valid input");
@@ -125,7 +121,7 @@ static void ReportMenu(RideReports reports, RideUtility rUtility){
 }
 
 //Directs program to respective customer options
-static void CustomerMenu(UserUtility uUtility, RideUtility rUtility, ReserveUtility resUtility, User[] users, Ride[] rides, Reservation[] reservations, User currentUser){
+static void CustomerMenu(User[] users, Ride[] rides, Reservation[] reservations, User currentUser, int userVal){
     Console.Clear();
     int userInput = -1;
 
@@ -145,19 +141,19 @@ static void CustomerMenu(UserUtility uUtility, RideUtility rUtility, ReserveUtil
         }
 
         if(userInput == 1){
-            rUtility.ViewAllRides(rides);
+            RideUtility.ViewAllRides(rides);
         }
         else if(userInput == 2){
-            resUtility.ReserveRide(rides, reservations, currentUser);
+            ReserveUtility.ReserveRide(rides, reservations, currentUser);
         }
         else if(userInput == 3){
-            resUtility.RideHistory(reservations, currentUser);
+            ReserveUtility.RideHistory(reservations, currentUser);
         }
         else if(userInput == 4){
-            uUtility.EditAccountInfo(users); //Write method
+            UserUtility.EditAccountInfo(users, currentUser, userVal); //Write method
         }
         else if(userInput == 5){
-            resUtility.CancelReservation(reservations, currentUser); //Edit date config
+            ReserveUtility.CancelReservation(reservations, currentUser); //Edit date config
         }
         else{
             RideUtility.Error("Please enter a valid input");
