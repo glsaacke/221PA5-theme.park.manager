@@ -39,6 +39,7 @@ namespace mis221_pa5_glsaacke
             }
             else{
                 AddUser(users, userFirstName, userLastName);
+                Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Blue;
                 System.Console.WriteLine("New user: " + userFirstName + userLastName + "\nUser added to system!");
                 Console.ResetColor();
@@ -116,7 +117,7 @@ namespace mis221_pa5_glsaacke
 
         static public void EditAccountInfo(User[] users, User currentUser, int userVal){
             Console.Clear();
-            System.Console.WriteLine("Welcome to the account edit interface. Select what you would like to change\n1. Email\n2. First name\n3. Last name\n4. Age\n 5. Return");
+            System.Console.WriteLine("Welcome to the account edit interface. Select what you would like to change\n1. Email\n2. First name\n3. Last name\n4. Age\n5. Return");
             int check = 0;
             int userInput = -1;
 

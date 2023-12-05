@@ -42,6 +42,7 @@ namespace mis221_pa5_glsaacke
                 //Update read in while condition
             }
         inFile.Close();
+        Ride.rideCount = rideCount;
         }
 
         static public void UpdateRideFile(Ride[] rides){
@@ -90,7 +91,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void RemoveRide(Ride[] rides){ //Changes ride status to deleted
+        static public void RemoveRide(Ride[] rides){ //FIXME Does not remove the ride from the file
             Console.Clear();
 
             System.Console.WriteLine("Enter the name of the ride you would like to remove");
@@ -106,7 +107,7 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        static public void EditRide(Ride[] rides){ //Edits information about a ride
+        static public void EditRide(Ride[] rides){ //FIXME index out of bounds error when editing "test ride" and editing ride type
             Console.Clear();
             System.Console.WriteLine("Enter the name of the ride you would like to edit");
             string inputName = Console.ReadLine();
@@ -163,24 +164,44 @@ namespace mis221_pa5_glsaacke
             return foundIndex;
         }
 
-        static public void SortRideArray(Ride[] rides){
-            for(int i = 0; i < rides.Length; i++){
-                
+        static private void SortRideArray(Ride[] rides){
+
+            for(int i = 0; i < Ride.rideCount; i++){
+                int index = i;
+
+                for(int j = i + 1; j < Ride.rideCount; j++){
+                    if(string.Compare(rides[j].GetRideName(), rides[i].GetRideName()) < 0){
+                        index = j;
+                    }
+                }
+
+                if(index != i){
+                    Ride temp = rides[i];
+                    rides[i] = rides[index];
+                    rides[index] = temp;
+                }
             }
         }
 
-        static public void ViewAllRides(Ride[] rides){
+        static public void ViewAllRides(Ride[] rides){ //FIXME displayed only the last two rides; object reference not set to an instance of an object error
+            Console.Clear();
+            System.Console.WriteLine("Here are the current operational rides\n");
+            SortRideArray(rides);
+            string currentRide = rides[0].GetRideName();
 
+            foreach(Ride r in rides){
+                if(r.GetOperational()){
+                    System.Console.WriteLine($"{r.GetRideName()}, a {r.GetRideType()} ride");
+                }
+            }
+            System.Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
         }
 
         static public void Error(string errorMessage){
             Console.ForegroundColor = ConsoleColor.Red;
             System.Console.WriteLine("Error: " + errorMessage);
             Console.ResetColor();
-        }
-
-        public void ViewAllRides(){
-            
         }
     }
 }

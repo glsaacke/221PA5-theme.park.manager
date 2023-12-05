@@ -57,7 +57,7 @@ namespace mis221_pa5_glsaacke
             outFile.Close();
         }
 
-        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){
+        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){ //FIXME Error: invalid input on creating a reservation
             int check = 0;
 
             while(check == 0){
@@ -94,7 +94,7 @@ namespace mis221_pa5_glsaacke
 
         }
 
-        static public void RideHistory(Reservation[] reservations, User currentUser){
+        static public void RideHistory(Reservation[] reservations, User currentUser){ //FIXME object reference not set to an instance //TODO add message for no reservations
             string custEmail = currentUser.GetUserEmail();
 
             System.Console.WriteLine("Here are the past reservations under your email: " + custEmail);
