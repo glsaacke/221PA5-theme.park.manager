@@ -9,7 +9,7 @@ namespace mis221_pa5_glsaacke
         private string rideType;
         private bool operational;
         private bool deleted;
-        static int maxID = 0;
+        static public int maxID = 0;
         static public int rideCount = 0;
 
         public Ride(int rideID, string rideName, string rideType, bool operational, bool deleted){ //Ride constructor

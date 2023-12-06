@@ -13,7 +13,7 @@ namespace mis221_pa5_glsaacke
        private string rideType;
        private DateTime reservationDate;
        private bool cancelled;
-       public int maxInteractionID = 0;
+       static public int maxInteractionID = 0;
        static public int reservationCount;
     
         public Reservation(){}
@@ -27,10 +27,10 @@ namespace mis221_pa5_glsaacke
             this.cancelled = cancelled;
         }
 
-        public int GetMaxInteractionID(){
+        static public int GetMaxInteractionID(){
             return maxInteractionID;
         }
-        public void IncrementInteractionID(){
+        static public void IncrementInteractionID(){
             maxInteractionID++;
         }
 

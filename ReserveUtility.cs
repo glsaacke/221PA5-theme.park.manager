@@ -7,8 +7,8 @@ namespace mis221_pa5_glsaacke
         private const int MAX_RESERVATIONS = 100;
         public ReserveUtility(){}
         
-        public void GetAllReservations(Reservation[] reservations){
-            StreamReader inFile = new StreamReader("reseravtions.txt");
+        static public void GetAllReservations(Reservation[] reservations){
+            StreamReader inFile = new StreamReader("reservations.txt");
             int reservationCount = 0;
 
             string line; //Priming read
@@ -34,6 +34,7 @@ namespace mis221_pa5_glsaacke
                     reservationCount++;
                 }
                 Reservation.reservationCount++;
+                Reservation.maxInteractionID = Reservation.reservationCount - 1;
                 //Update read in while condition
             }
         inFile.Close();
@@ -57,13 +58,14 @@ namespace mis221_pa5_glsaacke
             outFile.Close();
         }
 
-        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){ //FIXME Error: invalid input on creating a reservation
+        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){ //FIXME Error: invalid input on creating a reservation, possibly issue with date input
             int check = 0;
+            Console.Clear();
 
             while(check == 0){
                 try{
                     System.Console.WriteLine("Please enter the name of the ride you would like to reserve");
-                    string rideName = Console.ReadLine();
+                    string rideName = Console.ReadLine().ToUpper();
 
                     System.Console.WriteLine("Please enter the date you would like to reserve in mm/dd/yyyy format");
                     string userDate = Console.ReadLine();
@@ -74,12 +76,17 @@ namespace mis221_pa5_glsaacke
                     string[] times = userTime.Split(':');
 
                     DateTime dateTime = new DateTime(int.Parse(dates[2]), int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(times[0]), int.Parse(times[1]), 0);
+                    System.Console.WriteLine(dateTime);
 
                     Reservation temp = new Reservation();
 
                     int rideVal = RideUtility.FindRide(rideName, rides);
 
-                    Reservation myReservation = new Reservation(temp.GetMaxInteractionID(), currentUser.GetUserEmail(), rides[rideVal].GetRideID(), rideName, rides[rideVal].GetRideType(), dateTime, false);
+                    Reservation.IncrementInteractionID();
+
+                    Reservation myReservation = new Reservation(Reservation.maxInteractionID, currentUser.GetUserEmail(), rides[rideVal].GetRideID(), rideName, rides[rideVal].GetRideType(), dateTime, false);
+
+                    reservations[Reservation.reservationCount] = myReservation;
 
                     check = 1;
                 }
@@ -87,6 +94,7 @@ namespace mis221_pa5_glsaacke
                     RideUtility.Error("Error: invalid input. Please try again");
                 }
             }
+            Reservation.reservationCount++;
             System.Console.WriteLine("Ride reserved!");
             System.Console.WriteLine("Press any key to continue");
             Console.ReadKey();

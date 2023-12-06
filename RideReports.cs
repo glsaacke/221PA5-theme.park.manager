@@ -47,7 +47,7 @@ namespace mis221_pa5_glsaacke
             for(int i = 0; i < Reservation.reservationCount; i++){
 
                 if(reservations[i].GetRideName() == currentRide){
-                    if(reservations[i].GetCancelled() == false){
+                    if(reservations[i].GetCancelled() == false && reservations[i].GetReservationDate() > DateTime.Now){
                         currentCount ++;
                     }
                 }
@@ -57,9 +57,11 @@ namespace mis221_pa5_glsaacke
                     currentCount = 1;
                 }
             }
+            System.Console.WriteLine($"{currentRide} has {currentCount} active reservations");
             System.Console.WriteLine("\nPress any key to continue");
             Console.ReadKey();
         }
+        
 
         static public void RidesCompleted(Reservation[] reservations){ //Determines expired reservations
             Console.Clear();
@@ -126,7 +128,7 @@ namespace mis221_pa5_glsaacke
             for (int i = 0; i < separateRides.Length - 1; i++){
             
                 int maxIndex = i;
-                for (int j = i + 1; j < separateRides.Length; j++){
+                for (int j = i + 1; j < separateRides.Length - 1; j++){
                 
                     string[] rideInfo1 = separateRides[j].Split(',');
                     string[] rideInfoMax = separateRides[maxIndex].Split(',');
@@ -145,7 +147,7 @@ namespace mis221_pa5_glsaacke
                 separateRides[maxIndex] = temp;
             }
             System.Console.WriteLine("\nHere are the top 5 rides:");
-            for (int i = 0; i < Math.Min(5, separateRides.Length); i++){
+            for (int i = 0; i < Math.Min(5, separateRides.Length - 1); i++){
             
                 string[] rideInfo = separateRides[i].Split(',');
                 string rideName = rideInfo[0];

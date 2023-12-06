@@ -14,6 +14,7 @@ int userVal = UserUtility.LoginLogic(users);
 User currentUser = users[userVal];
 
 RideUtility.GetAllRides(rides);
+ReserveUtility.GetAllReservations(reservations);
 
 string menuInput = RunMenu(); 
 
@@ -91,18 +92,20 @@ static void ManagerialMenu(Ride[] rides, User[] users, Reservation[] reservation
 
 //Directs program to respective reports
 static void ReportMenu(Reservation[] reservations){ //FIXME fix spacing issues
-    System.Console.WriteLine("Please choose from the reports below");
-    System.Console.WriteLine("1. Most ridden ride\n 2. Active reservations\n 3. Rides Completed\n4. Top five rides\n 5. Exit menu");
     int userInput = -1;
 
-    try{
-        userInput = int.Parse(Console.ReadLine());
-    }
-    catch{
-        RideUtility.Error("Please enter a number");
-    }
-
     while(userInput != 5){
+        System.Console.WriteLine("Please choose from the reports below");
+        System.Console.WriteLine("1. Most ridden ride\n 2. Active reservations\n 3. Rides Completed\n4. Top five rides\n 5. Exit menu");
+
+        try{
+            userInput = int.Parse(Console.ReadLine());
+        }
+        catch{
+            RideUtility.Error("Please enter a number");
+        }
+
+
         if(userInput == 1){
             RideReports.MostRiddenRide(reservations);
         }

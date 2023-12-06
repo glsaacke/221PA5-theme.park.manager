@@ -43,6 +43,7 @@ namespace mis221_pa5_glsaacke
             }
         inFile.Close();
         Ride.rideCount = rideCount;
+        Ride.maxID = rideCount - 1;
         }
 
         static public void UpdateRideFile(Ride[] rides){
@@ -78,7 +79,7 @@ namespace mis221_pa5_glsaacke
 
             Ride ride = new Ride();
 
-            Ride myRide = new Ride(ride.GetMaxID(), inputName, inputType, true, false);
+            Ride myRide = new Ride(ride.GetMaxID(), inputName.ToUpper(), inputType.ToUpper(), true, false);
 
             rides[ride.GetMaxID()] = myRide;
 
@@ -155,7 +156,7 @@ namespace mis221_pa5_glsaacke
 
             Ride ride = new Ride();
 
-            for(int i = 0; i < ride.GetMaxID(); i ++){
+            for(int i = 0; i < Ride.rideCount; i ++){
 
                 if(rides[i].GetRideName() == inputRide){
                     foundIndex = i;

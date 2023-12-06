@@ -12,3 +12,17 @@ H:\Coding Materials\GitHub\GitHub_Practice\mis221-pa5-glsaacke\obj\Debug\net7.0\
 H:\Coding Materials\GitHub\GitHub_Practice\mis221-pa5-glsaacke\obj\Debug\net7.0\mis221-pa5-glsaacke.pdb
 H:\Coding Materials\GitHub\GitHub_Practice\mis221-pa5-glsaacke\obj\Debug\net7.0\mis221-pa5-glsaacke.genruntimeconfig.cache
 H:\Coding Materials\GitHub\GitHub_Practice\mis221-pa5-glsaacke\obj\Debug\net7.0\ref\mis221-pa5-glsaacke.dll
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\bin\Debug\net7.0\mis221-pa5-glsaacke.exe
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\bin\Debug\net7.0\mis221-pa5-glsaacke.deps.json
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\bin\Debug\net7.0\mis221-pa5-glsaacke.runtimeconfig.json
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\bin\Debug\net7.0\mis221-pa5-glsaacke.dll
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\bin\Debug\net7.0\mis221-pa5-glsaacke.pdb
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\obj\Debug\net7.0\mis221-pa5-glsaacke.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\obj\Debug\net7.0\mis221-pa5-glsaacke.AssemblyInfoInputs.cache
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\obj\Debug\net7.0\mis221-pa5-glsaacke.AssemblyInfo.cs
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\obj\Debug\net7.0\mis221-pa5-glsaacke.csproj.CoreCompileInputs.cache
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\obj\Debug\net7.0\mis221-pa5-glsaacke.dll
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\obj\Debug\net7.0\refint\mis221-pa5-glsaacke.dll
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\obj\Debug\net7.0\mis221-pa5-glsaacke.pdb
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\obj\Debug\net7.0\mis221-pa5-glsaacke.genruntimeconfig.cache
+C:\Users\gavin\Documents\GitHub\mis221-pa5-glsaacke\obj\Debug\net7.0\ref\mis221-pa5-glsaacke.dll
