@@ -24,12 +24,12 @@ namespace mis221_pa5_glsaacke
                     string rideName = temp[3];
                     string rideType = temp[4];
                     DateTime reservationDate = DateTime.ParseExact(temp[5], "MM/dd/yyyy HH:mm:ss", null);
-                    bool active = false;
+                    bool cancelled = false;
                     if(temp[6] == "0"){
-                        active = true;
+                        cancelled = true;
                     }
 
-                    Reservation myReservation = new Reservation(interactionID, custEmail, rideID, rideName, rideType, reservationDate, active);
+                    Reservation myReservation = new Reservation(interactionID, custEmail, rideID, rideName, rideType, reservationDate, cancelled);
                     reservations[reservationCount] = myReservation;
                     reservationCount++;
                 }
@@ -58,7 +58,7 @@ namespace mis221_pa5_glsaacke
             outFile.Close();
         }
 
-        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){ //FIXME Error: invalid input on creating a reservation, possibly issue with date input
+        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){ //FIXME IDs are assigned incorrectly
             int check = 0;
             Console.Clear();
 
@@ -76,6 +76,7 @@ namespace mis221_pa5_glsaacke
                     string[] times = userTime.Split(':');
 
                     DateTime dateTime = new DateTime(int.Parse(dates[2]), int.Parse(dates[0]), int.Parse(dates[1]), int.Parse(times[0]), int.Parse(times[1]), 0);
+                    Console.Clear();
                     System.Console.WriteLine(dateTime);
 
                     Reservation temp = new Reservation();
@@ -102,18 +103,27 @@ namespace mis221_pa5_glsaacke
 
         }
 
-        static public void RideHistory(Reservation[] reservations, User currentUser){ //FIXME object reference not set to an instance //TODO add message for no reservations
+        static public void RideHistory(Reservation[] reservations, User currentUser){
             string custEmail = currentUser.GetUserEmail();
+            SortReservationArray(reservations);
+            int count = 0;
 
             System.Console.WriteLine("Here are the past reservations under your email: " + custEmail);
 
             foreach(Reservation r in reservations){
-                if(custEmail == r.GetCustEmail()){
-                    System.Console.WriteLine($"{r.GetRideName()}{r.GetReservationDate}");
+                if(r != null){
+                    if(custEmail == r.GetCustEmail() && r.GetReservationDate() < DateTime.Now){
+                        System.Console.WriteLine($"{r.GetRideName()} {r.GetReservationDate()}");
+                        count ++;
+                    }
                 }
             }
 
-            System.Console.WriteLine("Press any key to continue");
+            if(count == 0){
+                System.Console.WriteLine("\nYou have no past reservations");
+            }
+
+            System.Console.WriteLine("\nPress any key to continue");
             Console.ReadKey();
         }
 
@@ -121,51 +131,50 @@ namespace mis221_pa5_glsaacke
             Console.Clear();
             int check = 0;
 
-            while(check == 0){
-                System.Console.WriteLine("Enter the ride you would like to cancel a reservation for");
-                string rideInput = Console.ReadLine().ToUpper();
-                string indexConcat = "";
-                int check2 = 0;
-                int check3 = 0;
-                string reservationIndex = "";
+            System.Console.WriteLine("Enter the ride you would like to cancel a reservation for");
+            string rideInput = Console.ReadLine().ToUpper();
+            string indexConcat = "";
+            int check3 = 0;
+            string reservationIndex = "";
 
-                for(int i = 0; i < Reservation.reservationCount; i++){
-                    if(rideInput == reservations[i].GetRideName() && reservations[i].GetCustEmail() == currentUser.GetUserEmail()){
-                        System.Console.WriteLine($"{i}. {rideInput} reservation on {reservations[i].GetReservationDate().ToString("MM/dd/yyyy HH:mm")}");
-                        indexConcat += $"{i},";                    
-                    }
-                }
-
-                if(indexConcat == ""){
-                    check2 = 1;
-                    System.Console.WriteLine("You have no current reservations for " + rideInput);
-                }
-
-                string[] options = indexConcat.Split(',');
-
-                while(check2 == 0){
-                    System.Console.WriteLine("\nPlease enter the number of the reservation you would like to cancel");
-
-                    while(check3 == 0){
-                        string indexInput = Console.ReadLine();
-
-                        for(int i = 0; i < options.Length; i++){
-                            if(options[i] == indexInput){
-                                reservationIndex = indexInput;
-                                check3 = 1;
-                            }
-                        }
-
-                        if(check3 == 0){
-                            RideUtility.Error("Error: Please enter a number from the above results");
-                        }
-                    }
-                
-                    reservations[int.Parse(reservationIndex)].ToggleCancelled();
-
-                    System.Console.WriteLine("Reservation sucessfully cancelled!");
+            for(int i = 0; i < Reservation.reservationCount; i++){
+                if(rideInput == reservations[i].GetRideName() && reservations[i].GetCustEmail() == currentUser.GetUserEmail() && reservations[i].GetReservationDate() > DateTime.Now){
+                    System.Console.WriteLine($"{i}. {rideInput} reservation on {reservations[i].GetReservationDate().ToString("MM/dd/yyyy HH:mm")}");
+                    indexConcat += $"{i},";                    
                 }
             }
+
+            if(indexConcat == ""){
+                System.Console.WriteLine("You have no current reservations for " + rideInput);
+                check = 1;
+            }
+
+            string[] options = indexConcat.Split(',');
+
+            if(check == 0){
+                System.Console.WriteLine("\nPlease enter the number of the reservation you would like to cancel");
+
+                while(check3 == 0){
+                    string indexInput = Console.ReadLine();
+
+                    for(int i = 0; i < options.Length; i++){
+                        if(options[i] == indexInput){
+                            reservationIndex = indexInput;
+                            check3 = 1;
+                        }
+                    }
+
+                    if(check3 == 0){
+                        RideUtility.Error("Error: Please enter a number from the above results");
+                    }
+                }
+            
+                reservations[int.Parse(reservationIndex)].ToggleCancelled();
+
+                System.Console.WriteLine("Reservation sucessfully cancelled!");
+            }
+                
+            
 
             System.Console.WriteLine("Press any key to continue");
             Console.ReadKey();

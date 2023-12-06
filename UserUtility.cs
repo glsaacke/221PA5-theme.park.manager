@@ -28,6 +28,7 @@ namespace mis221_pa5_glsaacke
                 for(int i = 0; i < userCount; i++){
                     if(CompareNames(users[i].GetFirstName(), userFirstName)){
                         if(CompareNames(users[i].GetLastName(), userLastName)){
+                            Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Blue;
                             System.Console.WriteLine("Welcome back " + userFirstName);
                             Console.ResetColor();

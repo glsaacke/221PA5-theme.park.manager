@@ -63,7 +63,7 @@ namespace mis221_pa5_glsaacke
             return cancelled;
         }
         public void ToggleCancelled(){
-         cancelled =  cancelled;
+         cancelled =  !cancelled;
         }
         
 

@@ -49,20 +49,18 @@ namespace mis221_pa5_glsaacke
         static public void UpdateRideFile(Ride[] rides){
             StreamWriter outFile = new StreamWriter("rides.txt", false);
 
-            for(int i = 0; i < rides.Length; i ++){
+            foreach(Ride r in rides){
                 string operational = "1";
                 string deleted = "1";
 
-                Ride ride = rides[i];
-
-                if(ride != null){
-                    if(ride.GetOperational()){
+                if(r != null){
+                    if(r.GetOperational()){
                         operational = "0";
                     }
-                    if(ride.GetDeleted()){
+                    if(r.GetDeleted()){
                         deleted = "0";
                     }
-                    outFile.WriteLine($"{ride.GetRideID()}#{ride.GetRideName().ToUpper()}#{ride.GetRideType().ToUpper()}#{operational}#{deleted}");
+                    outFile.WriteLine($"{r.GetRideID()}#{r.GetRideName().ToUpper()}#{r.GetRideType().ToUpper()}#{operational}#{deleted}");
                 }
             }
             outFile.Close();
@@ -81,9 +79,8 @@ namespace mis221_pa5_glsaacke
 
             Ride myRide = new Ride(ride.GetMaxID(), inputName.ToUpper(), inputType.ToUpper(), true, false);
 
-            rides[ride.GetMaxID()] = myRide;
-
             ride.IncrementMaxID();
+            rides[Ride.maxID] = myRide;
 
             Console.ForegroundColor = ConsoleColor.Green;
             System.Console.WriteLine("New ride added!");
@@ -96,7 +93,7 @@ namespace mis221_pa5_glsaacke
             Console.Clear();
 
             System.Console.WriteLine("Enter the name of the ride you would like to remove");
-            string inputRide = Console.ReadLine();
+            string inputRide = Console.ReadLine().ToUpper();
 
             int foundIndex = FindRide(inputRide, rides);
 
@@ -105,7 +102,10 @@ namespace mis221_pa5_glsaacke
             }
             else{
                 rides[foundIndex].ToggleDeleted();
+                System.Console.WriteLine("Ride sucessully removed!");
             }
+            System.Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
         }
 
         static public void EditRide(Ride[] rides){ //FIXME index out of bounds error when editing "test ride" and editing ride type

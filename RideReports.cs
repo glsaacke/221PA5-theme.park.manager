@@ -123,6 +123,10 @@ namespace mis221_pa5_glsaacke
                 }
             }
 
+            if(reservations[Reservation.reservationCount - 1].GetRideName() != reservations[Reservation.reservationCount - 2].GetRideName()){
+                rideConcat += $"{reservations[Reservation.reservationCount - 1].GetRideName()},1";
+            }
+
             string[] separateRides = rideConcat.Split('#');
 
             for (int i = 0; i < separateRides.Length - 1; i++){
@@ -147,7 +151,7 @@ namespace mis221_pa5_glsaacke
                 separateRides[maxIndex] = temp;
             }
             System.Console.WriteLine("\nHere are the top 5 rides:");
-            for (int i = 0; i < Math.Min(5, separateRides.Length - 1); i++){
+            for (int i = 0; i < Math.Min(5, separateRides.Length); i++){
             
                 string[] rideInfo = separateRides[i].Split(',');
                 string rideName = rideInfo[0];

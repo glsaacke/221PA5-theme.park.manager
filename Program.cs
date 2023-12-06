@@ -91,12 +91,13 @@ static void ManagerialMenu(Ride[] rides, User[] users, Reservation[] reservation
 }   
 
 //Directs program to respective reports
-static void ReportMenu(Reservation[] reservations){ //FIXME fix spacing issues
+static void ReportMenu(Reservation[] reservations){ 
     int userInput = -1;
 
     while(userInput != 5){
+        Console.Clear();
         System.Console.WriteLine("Please choose from the reports below");
-        System.Console.WriteLine("1. Most ridden ride\n 2. Active reservations\n 3. Rides Completed\n4. Top five rides\n 5. Exit menu");
+        System.Console.WriteLine("1. Most ridden ride\n2. Active reservations\n3. Rides Completed\n4. Top five rides\n5. Exit menu");
 
         try{
             userInput = int.Parse(Console.ReadLine());
@@ -126,10 +127,10 @@ static void ReportMenu(Reservation[] reservations){ //FIXME fix spacing issues
 
 //Directs program to respective customer options
 static void CustomerMenu(User[] users, Ride[] rides, Reservation[] reservations, User currentUser, int userVal){
-    Console.Clear();
     int userInput = -1;
 
     while(userInput != 6){
+        Console.Clear();
         System.Console.WriteLine("You are now in the customer interface menu. Please select an option below");
         System.Console.WriteLine("1. View all operational rides\n2. Reserve a ride\n3. View ride history\n4. Update user account information\n5. Cancel a reservation\n6. Return to home menu");
         int check = 0; //Priming read
@@ -160,7 +161,9 @@ static void CustomerMenu(User[] users, Ride[] rides, Reservation[] reservations,
             ReserveUtility.CancelReservation(reservations, currentUser); //Edit date config
         }
         else{
-            RideUtility.Error("Please enter a valid input");
+            if(userInput != 6){
+                RideUtility.Error("Please enter a valid input");
+            }
         }
     }
     
