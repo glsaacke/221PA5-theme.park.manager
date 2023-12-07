@@ -3,9 +3,9 @@ namespace mis221_pa5_glsaacke
     public class RideReports
     {
         private string rideName;
-        private string rideType;
+        private string rideType;//TODO add time gap to "..." for all reports
 
-        static public void MostRiddenRide(Reservation[] reservations){ //Returns the most ridden ride
+        static public void MostRiddenRide(Reservation[] reservations){ //Returns the most ridden ride //FIXME edit line spacing
             Console.Clear();
             System.Console.WriteLine("Calculating the most ridden ride...");
 
@@ -98,7 +98,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void TopFiveRides(Reservation[] reservations){ //Determines the top 5 rides based on reservation
+        static public void TopFiveRides(Reservation[] reservations){ //Determines the top 5 rides based on reservation //FIXME index out of bounds error
             Console.Clear();
             System.Console.WriteLine("Calculating top 5 rides based on active reservations");
             
@@ -155,7 +155,7 @@ namespace mis221_pa5_glsaacke
             
                 string[] rideInfo = separateRides[i].Split(',');
                 string rideName = rideInfo[0];
-                int count = int.Parse(rideInfo[1]);
+                int count = int.Parse(rideInfo[1]); //ERROR occurs here after rocketship is listed
                 System.Console.WriteLine($"{rideName} has {count} active reservations.");
             }
 

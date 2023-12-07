@@ -46,7 +46,7 @@ namespace mis221_pa5_glsaacke
         Ride.maxID = rideCount - 1;
         }
 
-        static public void UpdateRideFile(Ride[] rides){
+        static public void UpdateRideFile(Ride[] rides){ //FIXME index creation error: starts at -1
             StreamWriter outFile = new StreamWriter("rides.txt", false);
 
             foreach(Ride r in rides){
@@ -89,7 +89,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void RemoveRide(Ride[] rides){ //FIXME Does not remove the ride from the file
+        static public void RemoveRide(Ride[] rides){
             Console.Clear();
 
             System.Console.WriteLine("Enter the name of the ride you would like to remove");
@@ -108,51 +108,59 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void EditRide(Ride[] rides){ //FIXME index out of bounds error when editing "test ride" and editing ride type
+        static public void EditRide(Ride[] rides){
             Console.Clear();
             System.Console.WriteLine("Enter the name of the ride you would like to edit");
-            string inputName = Console.ReadLine();
+            string inputName = Console.ReadLine().ToUpper();
 
             int foundIndex = FindRide(inputName, rides);
 
-            System.Console.WriteLine("Select which aspect of " + inputName + " you would like to change");
-            System.Console.WriteLine("1. Ride name\n 2. Ride Type\n 3. Ride operating status");
-            int userInput = -1;
+            if(foundIndex != -2){
+                System.Console.WriteLine("Select which aspect of " + inputName + " you would like to change");
+                System.Console.WriteLine("1. Ride name\n2. Ride Type\n3. Ride operating status");
+                int userInput = -1;
 
-            try{
-                userInput = int.Parse(Console.ReadLine());
-            }
-            catch{
-                Error("Please enter a number");
-            }
+                try{
+                    userInput = int.Parse(Console.ReadLine());
+                }
+                catch{
+                    Error("Please enter a number");
+                }
 
-            if(userInput == 1){
-                System.Console.WriteLine("Enter the new ride name");
-                rides[foundIndex].SetRideName(Console.ReadLine());
-                System.Console.WriteLine("Ride name has been changed");
-            }
-            else if( userInput == 2){
-                System.Console.WriteLine("Enter the new ride type");
-                rides[foundIndex].SetRideType(Console.ReadLine());
-                System.Console.WriteLine("Ride type has been changed");
-            }
-            else if(userInput == 3){
-                rides[foundIndex].ToggleOperational();
+                if(userInput == 1){
+                    System.Console.WriteLine("Enter the new ride name");
+                    rides[foundIndex].SetRideName(Console.ReadLine().ToUpper());
+                    System.Console.WriteLine("Ride name has been changed");
+                }
+                else if( userInput == 2){
+                    System.Console.WriteLine("Enter the new ride type");
+                    rides[foundIndex].SetRideType(Console.ReadLine().ToUpper());
+                    System.Console.WriteLine("Ride type has been changed");
+                }
+                else if(userInput == 3){
+                    rides[foundIndex].ToggleOperational();
 
-                if(rides[foundIndex].GetOperational()){
-                    System.Console.WriteLine($"{inputName} is now operational");
+                    if(rides[foundIndex].GetOperational()){
+                        System.Console.WriteLine($"{inputName} is now operational");
+                    }
+                    else{
+                        System.Console.WriteLine(inputName + " is no longer operational");
+                    }
                 }
                 else{
-                    System.Console.WriteLine(inputName + " is now not operational");
+                    Error("Please enter a valid input");
                 }
             }
             else{
-                Error("Please enter a valid input");
+                Error("Ride does not exist. Please try again");
             }
+
+            System.Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
         }
 
         static public int FindRide(string inputRide, Ride[] rides){ //Determines the position of a ride inside the array
-            int foundIndex = -1;
+            int foundIndex = -2;
 
             Ride ride = new Ride();
 
@@ -184,15 +192,17 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        static public void ViewAllRides(Ride[] rides){ //FIXME displayed only the last two rides; object reference not set to an instance of an object error
+        static public void ViewAllRides(Ride[] rides){
             Console.Clear();
             System.Console.WriteLine("Here are the current operational rides\n");
             SortRideArray(rides);
             string currentRide = rides[0].GetRideName();
 
             foreach(Ride r in rides){
-                if(r.GetOperational()){
-                    System.Console.WriteLine($"{r.GetRideName()}, a {r.GetRideType()} ride");
+                if(r != null){
+                    if(r.GetOperational()){
+                        System.Console.WriteLine($"{r.GetRideName()}, a {r.GetRideType()} ride");
+                    }
                 }
             }
             System.Console.WriteLine("\nPress any key to continue");

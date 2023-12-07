@@ -32,7 +32,7 @@ ReserveUtility.UpdateReservationFile(reservations);
 //***End Main
 //TODO label all methods
 //Gathers user menu selection
-static string RunMenu(){
+static string RunMenu(){ //TODO create word art for waterpark 
     System.Console.WriteLine("Please select an option from the menu below:\n1. Managerial Functions\n2. Customer Functions\n3. Exit");
     string userInput = Console.ReadLine();
     return userInput;

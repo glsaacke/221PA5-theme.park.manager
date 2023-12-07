@@ -50,8 +50,8 @@ namespace mis221_pa5_glsaacke
         public bool GetOperational(){
             return operational;
         }
-        public bool ToggleOperational(){
-            return !operational;
+        public void ToggleOperational(){
+            this.operational = !operational;
         }
 
 
