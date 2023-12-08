@@ -115,7 +115,11 @@ namespace mis221_pa5_glsaacke
 
         static public void TopFiveRides(Reservation[] reservations){ //Determines the top 5 rides based on reservation
             Console.Clear();
-            System.Console.WriteLine("Calculating top 5 rides based on active reservations");
+            System.Console.Write("Calculating top 5 rides based on active reservations");
+            DisplayDots();
+            System.Console.WriteLine();
+            System.Console.WriteLine();
+            System.Console.WriteLine("─────────────────────────────────────────────────────────────");
             
             ReserveUtility.SortReservationArray(reservations); //check sort logic
 
@@ -162,7 +166,6 @@ namespace mis221_pa5_glsaacke
                 separateRides[i] = separateRides[maxIndex];
                 separateRides[maxIndex] = temp;
             }
-            System.Console.WriteLine("\nHere are the top 5 rides:");
             for (int i = 0; i < Math.Min(5, separateRides.Length); i++){
             
                 string[] rideInfo = separateRides[i].Split(',');
@@ -170,7 +173,7 @@ namespace mis221_pa5_glsaacke
                 int count = int.Parse(rideInfo[1]); //ERROR occurs here after rocketship is listed
                 System.Console.WriteLine($"{rideName} has {count} active reservations.");
             }
-
+            System.Console.WriteLine("─────────────────────────────────────────────────────────────");
             System.Console.WriteLine("\nPress any key to continue");
             Console.ReadKey();
         }

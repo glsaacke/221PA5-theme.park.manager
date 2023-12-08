@@ -6,7 +6,7 @@ namespace mis221_pa5_glsaacke
     public class UserUtility
     {
         static int userCount = 0;
-        private const int MAX_USERS = 99;
+        private const int MAX_USERS = 999;
 
         public UserUtility(){}
 
@@ -30,7 +30,12 @@ namespace mis221_pa5_glsaacke
                         if(CompareNames(users[i].GetLastName(), userLastName)){
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Blue;
-                            System.Console.WriteLine("Welcome back " + userFirstName);
+                            if(users[i].GetAdmin() == 1){
+                                System.Console.WriteLine("Welcome back " + userFirstName + " (ADMIN)");
+                            }
+                            else{
+                                System.Console.WriteLine("Welcome back " + userFirstName);
+                            }
                             Console.ResetColor();
                             userVal = i;
                             check++;
@@ -59,21 +64,24 @@ namespace mis221_pa5_glsaacke
                     
                     string[] temp = line.Split('#');
 
-                    if (temp.Length >= 5)
+                    if (temp.Length >= 6)
                     {
                         int userID = int.Parse(temp[0]);
                         string userEmail = temp[1];
                         string userFirst = temp[2];
                         string userLast = temp[3];
                         int userAge = int.Parse(temp[4]);
+                        int admin = int.Parse(temp[5]);
 
-                        User user = new User(userID, userEmail, userFirst, userLast, userAge);
+                        User user = new User(userID, userEmail, userFirst, userLast, userAge, admin);
                         users[userCount] = user;
                         userCount++;
                     }
                     //Update read in while condition
+
                 }
             inFile.Close();
+            User.maxID = userCount;
 
             return userCount;
         }
@@ -100,9 +108,9 @@ namespace mis221_pa5_glsaacke
             System.Console.WriteLine("Please enter your age");
             int userAge = int.Parse(Console.ReadLine());
 
-            User user = new User(temp.GetMaxID(), userEmail, userFirstName, userLastName, userAge);
-            users[user.GetMaxID()] = user;
+            User user = new User(temp.GetMaxID(), userEmail, userFirstName, userLastName, userAge, 0);
             user.IncrementMaxID();
+            users[user.GetMaxID()] = user;
         }
 
         static public int SearchUser(User[] users, string userFirstName, string userLastName, int userCount){ //Determines if a user exists
@@ -179,25 +187,51 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
+        static public void ChangeAdminStatus(User[] users, int userVal){
+            Console.Clear();
+            System.Console.WriteLine("Attempting to change admin status\n");
+
+            if(users[userVal].GetAdmin() == 0){
+                System.Console.WriteLine("Please enter the password\n");
+                string userPass = Console.ReadLine();
+
+                if(userPass == "mis221"){
+                    users[userVal].SetAdmin(1);
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    System.Console.WriteLine("\nYou are now an admin!\n");
+                    Console.ResetColor();
+                }
+                else{
+                    RideUtility.Error("Incorrect password\n");
+                }
+            }
+            else{
+                RideUtility.Error("You are already an admin\n");
+            }
+
+            System.Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+        }
+
         static public void UpdateUserFile(User[] users){ //Overwrites text file with updated array
             StreamWriter outFile = new StreamWriter("users.txt", false);
 
             for(int i = 0; i < users.Length; i ++){
                 User user = users[i];
                 if(user != null){
-                    outFile.WriteLine($"{user.GetUserID()}#{user.GetUserEmail()}#{user.GetFirstName()}#{user.GetLastName()}#{user.GetUserAge()}");
+                    outFile.WriteLine($"{user.GetUserID()}#{user.GetUserEmail()}#{user.GetFirstName()}#{user.GetLastName()}#{user.GetUserAge()}#{user.GetAdmin()}");
                 }
             }
             outFile.Close();
         }
 
         static public void WriteLogo(){
-            System.Console.WriteLine(@"   _______          _       __      __            ____             __  ");
-            System.Console.WriteLine(@"  / ____( )_____   | |     / /___ _/ /____  _____/ __ \____ ______/ /__");
-            System.Console.WriteLine(@" / / __ |// ___/   | | /| / / __ `/ __/ _ \/ ___/ /_/ / __ `/ ___/ //_/");
-            System.Console.WriteLine(@"/ /_/ /  (__  )    | |/ |/ / /_/ / /_/  __/ /  / ____/ /_/ / /  / ,<   ");
-            System.Console.WriteLine(@"\____/  /____/     |__/|__/\__,_/\__/\___/_/  /_/    \__,_/_/  /_/|_|  ");
-            System.Console.WriteLine(@"                                                                       ");
+            System.Console.WriteLine(@"   _______          ________                        ____             __  ");
+            System.Console.WriteLine(@"  / ____( )_____   /_  __/ /_  ___  ____ ___  ___  / __ \____ ______/ /__");
+            System.Console.WriteLine(@" / / __ |// ___/    / / / __ \/ _ \/ __ `__ \/ _ \/ /_/ / __ `/ ___/ //_/");
+            System.Console.WriteLine(@"/ /_/ /  (__  )    / / / / / /  __/ / / / / /  __/ ____/ /_/ / /  / ,<   ");
+            System.Console.WriteLine(@"\____/  /____/    /_/ /_/ /_/\___/_/ /_/ /_/\___/_/    \__,_/_/  /_/|_|  ");
+            System.Console.WriteLine(@"                                                                         ");
         }
     }
 }

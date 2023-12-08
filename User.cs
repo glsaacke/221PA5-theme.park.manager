@@ -7,14 +7,16 @@ namespace mis221_pa5_glsaacke
         private string firstName;
         private string lastName;
         private int userAge;
-        static int maxID = 0;
+        private int admin;
+        static public int maxID = 0;
 
-        public User(int userID, string userEmail, string firstName, string lastName, int userAge){
+        public User(int userID, string userEmail, string firstName, string lastName, int userAge, int admin){
             this.userID = userID;
             this.userEmail = userEmail;
             this.firstName = firstName;
             this.lastName = lastName;
             this.userAge = userAge;
+            this.admin = admin;
         }
 
         public User(){} //No args User constructor
@@ -64,6 +66,15 @@ namespace mis221_pa5_glsaacke
 
         public void SetUserAge(int userAge){
             this.userAge = userAge;
+        }
+
+
+        public int GetAdmin(){
+            return admin;
+        }
+
+        public void SetAdmin(int admin){
+            this.admin = admin;
         }
 
 

@@ -44,10 +44,10 @@ namespace mis221_pa5_glsaacke
             inFile.Close();
             Ride.rideCount = rideCount;
             if(rideCount > 0){
-                Ride.maxID = rideCount -1;
+                Ride.maxID = rides.Where(r=> r != null).Max(r=> r.GetRideID());
             }
             else{
-                Ride.maxID = rideCount;
+                Ride.maxID = 0;
             }
         }
 
@@ -80,12 +80,11 @@ namespace mis221_pa5_glsaacke
             System.Console.WriteLine("Enter the ride type of " + inputName);
             string inputType = Console.ReadLine();
 
-            Ride ride = new Ride();
-
-            Ride myRide = new Ride(Ride.GetMaxID(), inputName.ToUpper(), inputType.ToUpper(), true, false);
+            Ride myRide = new Ride(Ride.GetMaxID() + 1, inputName.ToUpper(), inputType.ToUpper(), true, false);
 
             Ride.IncrementMaxID();
-            rides[Ride.maxID] = myRide;
+            rides[Ride.GetMaxID()] = myRide;
+
 
             Console.ForegroundColor = ConsoleColor.Green;
             System.Console.WriteLine("\nNew ride added!\n");
@@ -107,7 +106,9 @@ namespace mis221_pa5_glsaacke
             }
             else{
                 rides[foundIndex].ToggleDeleted();
-                System.Console.WriteLine("Ride sucessully removed!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                System.Console.WriteLine("\nRide sucessully removed!");
+                Console.ResetColor();
             }
             System.Console.WriteLine("\nPress any key to continue");
             Console.ReadKey();
