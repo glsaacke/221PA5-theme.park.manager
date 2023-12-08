@@ -12,7 +12,7 @@ namespace mis221_pa5_glsaacke
 
         }
 
-        static public void GetAllRides(Ride[] rides){
+        static public void GetAllRides(Ride[] rides){ // Imports ride data from .txt
             StreamReader inFile = new StreamReader("rides.txt");
             int rideCount = 0;
 
@@ -51,7 +51,7 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        static public void UpdateRideFile(Ride[] rides){ //FIXME index creation error: starts at -1
+        static public void UpdateRideFile(Ride[] rides){ //Exports ride  data to .txt
             StreamWriter outFile = new StreamWriter("rides.txt", false);
 
             foreach(Ride r in rides){
@@ -93,7 +93,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void RemoveRide(Ride[] rides){ //FIXME index out of bounds when removing a recently added ride
+        static public void RemoveRide(Ride[] rides){ // Toggles deleted for a specified ride
             Console.Clear();
 
             System.Console.WriteLine("Enter the name of the ride you would like to remove");
@@ -114,7 +114,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void EditRide(Ride[] rides){ //FIXME does not edit a recently added ride
+        static public void EditRide(Ride[] rides){ // Changes a specified aspect of an existing ride 
             Console.Clear();
             System.Console.WriteLine("Enter the name of the ride you would like to edit");
             string inputName = Console.ReadLine().ToUpper();
@@ -183,7 +183,7 @@ namespace mis221_pa5_glsaacke
             return foundIndex;
         }
 
-        static private void SortRideArray(Ride[] rides){
+        static private void SortRideArray(Ride[] rides){ // Selection sort
 
             for(int i = 0; i <= Ride.maxID; i++){
                 int index = i;
@@ -202,7 +202,7 @@ namespace mis221_pa5_glsaacke
             }
         }
 
-        static public void ViewAllRides(Ride[] rides){
+        static public void ViewAllRides(Ride[] rides){ // Displays all operational rides
             Console.Clear();
             System.Console.WriteLine("Here are the current operational rides:\n");
             System.Console.WriteLine("─────────────────────────────────────────────────────────────");
@@ -221,7 +221,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void Error(string errorMessage){
+        static public void Error(string errorMessage){ // Error message
             Console.ForegroundColor = ConsoleColor.Red;
             System.Console.WriteLine("Error: " + errorMessage);
             Console.ResetColor();

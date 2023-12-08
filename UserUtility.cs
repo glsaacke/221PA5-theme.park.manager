@@ -87,7 +87,7 @@ namespace mis221_pa5_glsaacke
         }
 
 
-        static private bool CompareNames(string name1, string name2){ //Compares user data 
+        static private bool CompareNames(string name1, string name2){ //Compares input data 
 
             if(name1 == name2){
                     return true;
@@ -127,7 +127,7 @@ namespace mis221_pa5_glsaacke
             return check; 
         }
 
-        static public void EditAccountInfo(User[] users, User currentUser, int userVal){
+        static public void EditAccountInfo(User[] users, User currentUser, int userVal){ // Changes a specified aspect of a user object
             Console.Clear();
             System.Console.WriteLine("Welcome to the account edit interface");
             System.Console.WriteLine("\nSelect what you would like to change:1\n1. Email\n2. First name\n3. Last name\n4. Age\n5. Return");
@@ -187,7 +187,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void ChangeAdminStatus(User[] users, int userVal){
+        static public void ChangeAdminStatus(User[] users, int userVal){ // Requests password to change admin variable
             Console.Clear();
             System.Console.WriteLine("Attempting to change admin status\n");
 
@@ -225,7 +225,7 @@ namespace mis221_pa5_glsaacke
             outFile.Close();
         }
 
-        static public void WriteLogo(){
+        static public void WriteLogo(){ // Displays wordart
             System.Console.WriteLine(@"   _______          ________                        ____             __  ");
             System.Console.WriteLine(@"  / ____( )_____   /_  __/ /_  ___  ____ ___  ___  / __ \____ ______/ /__");
             System.Console.WriteLine(@" / / __ |// ___/    / / / __ \/ _ \/ __ `__ \/ _ \/ /_/ / __ `/ ___/ //_/");

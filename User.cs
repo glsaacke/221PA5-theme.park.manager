@@ -10,7 +10,7 @@ namespace mis221_pa5_glsaacke
         private int admin;
         static public int maxID = 0;
 
-        public User(int userID, string userEmail, string firstName, string lastName, int userAge, int admin){
+        public User(int userID, string userEmail, string firstName, string lastName, int userAge, int admin){ // Constructor
             this.userID = userID;
             this.userEmail = userEmail;
             this.firstName = firstName;

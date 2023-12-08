@@ -16,8 +16,8 @@ namespace mis221_pa5_glsaacke
        static public int maxInteractionID = 0;
        static public int reservationCount;
     
-        public Reservation(){}
-        public Reservation(int interactionID, string customerEmail, int rideID, string rideName, string rideType, DateTime reservationDate, bool cancelled){
+        public Reservation(){} // No args consrtuctor
+        public Reservation(int interactionID, string customerEmail, int rideID, string rideName, string rideType, DateTime reservationDate, bool cancelled){ // Constructor
             this.interactionID = interactionID;
             this.customerEmail = customerEmail;
             this.rideID = rideID;

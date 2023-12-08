@@ -2,7 +2,7 @@ namespace mis221_pa5_glsaacke
 {
     public class RideReports
     {
-        static public void MostRiddenRide(Reservation[] reservations){ //Returns the most ridden ride //FIXME edit line spacing
+        static public void MostRiddenRide(Reservation[] reservations){ //Returns the most ridden ride
             Console.Clear();
             System.Console.Write("Calculating the most ridden ride");
             DisplayDots();
@@ -10,11 +10,11 @@ namespace mis221_pa5_glsaacke
             System.Console.WriteLine();
             System.Console.WriteLine("─────────────────────────────────────────────────────────────");
 
-            ReserveUtility.SortReservationArray(reservations); //Build out method
+            ReserveUtility.SortReservationArray(reservations);
 
             string currentRide = reservations[0].GetRideName(); 
             string mostRiddenRide = currentRide;
-            int currentCount = 0;
+            int currentCount = 0; // Priming read
             int greatestCount = 0;
 
             for(int i = 0; i < Reservation.reservationCount; i++){
@@ -23,12 +23,12 @@ namespace mis221_pa5_glsaacke
                     currentCount++;
                 }
                 else{
-                    if(currentCount > greatestCount){
+                    if(currentCount > greatestCount){ // Handle break
                         greatestCount = currentCount;
                         mostRiddenRide = currentRide;
                     }
                     currentRide = reservations[i].GetRideName();
-                    currentCount = 1;
+                    currentCount = 1; // Update read
                 }
             }
 
@@ -38,7 +38,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void ActiveReservations(Reservation[] reservations){ //Determines number of active reservations
+        static public void ActiveReservations(Reservation[] reservations){ //Determines number of active reservations by ride
 
             Console.Clear();
             System.Console.Write("Calculating active reservations by ride");
@@ -48,7 +48,7 @@ namespace mis221_pa5_glsaacke
             System.Console.WriteLine("─────────────────────────────────────────────────────────────");
 
             string currentRide = reservations[0].GetRideName();
-            int currentCount = 0;
+            int currentCount = 0; // Priming read
 
             for(int i = 0; i < Reservation.reservationCount; i++){
 
@@ -58,7 +58,7 @@ namespace mis221_pa5_glsaacke
                     }
                 }
                 else{
-                    System.Console.WriteLine($"{currentRide} has {currentCount} active reservations");
+                    System.Console.WriteLine($"{currentRide} has {currentCount} active reservations"); // Handle bread
                     currentRide = reservations[i].GetRideName();
                     currentCount = 1;
                 }
@@ -70,7 +70,7 @@ namespace mis221_pa5_glsaacke
         }
         
 
-        static public void RidesCompleted(Reservation[] reservations){ //Determines expired reservations
+        static public void RidesCompleted(Reservation[] reservations){ //Displays expired reservations by ride
             Console.Clear();
             System.Console.Write("Calculating completed reservations by ride");
             DisplayDots();
@@ -99,7 +99,7 @@ namespace mis221_pa5_glsaacke
                     currentCount++;
                 }
                 else{
-                    System.Console.WriteLine($"{currentCount} completed reservations for {currentRide}");
+                    System.Console.WriteLine($"{currentCount} completed reservations for {currentRide}"); // Handle break
                     currentRide = oldReservations[i].GetRideName();
                     currentCount = 1;
                 }
@@ -110,7 +110,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void TopFiveRides(Reservation[] reservations){ //Determines the top 5 rides based on reservation
+        static public void TopFiveRides(Reservation[] reservations){ //Determines the top 5 rides based on active reservations
             Console.Clear();
             System.Console.Write("Calculating top 5 rides based on active reservations");
             DisplayDots();
@@ -118,7 +118,7 @@ namespace mis221_pa5_glsaacke
             System.Console.WriteLine();
             System.Console.WriteLine("─────────────────────────────────────────────────────────────");
             
-            ReserveUtility.SortReservationArray(reservations); //check sort logic
+            ReserveUtility.SortReservationArray(reservations);
 
             string currentRide = reservations[0].GetRideName();
             int currentCount = 0;
@@ -132,7 +132,7 @@ namespace mis221_pa5_glsaacke
                     }
                 }
                 else{
-                    rideConcat += $"{currentRide},{currentCount}#";
+                    rideConcat += $"{currentRide},{currentCount}#"; // Handle break
                     currentRide = reservations[i].GetRideName();
                     currentCount = 1;
                 }
@@ -142,7 +142,7 @@ namespace mis221_pa5_glsaacke
 
             string[] separateRides = rideConcat.Split('#');
 
-            for (int i = 0; i < separateRides.Length - 1; i++){
+            for (int i = 0; i < separateRides.Length - 1; i++){ // Selection sort
             
                 int maxIndex = i;
                 for (int j = i + 1; j < separateRides.Length - 1; j++){
@@ -175,7 +175,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static private void DisplayDots(){
+        static private void DisplayDots(){ // Displays "..." but slower
             Thread.Sleep(600);
             Console.Write(".");
             Thread.Sleep(600);

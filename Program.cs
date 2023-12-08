@@ -16,13 +16,13 @@ User currentUser = users[userVal];
 RideUtility.GetAllRides(rides);
 ReserveUtility.GetAllReservations(reservations);
 
-string menuInput = RunMenu(); 
+string menuInput = RunMenu(); //Priming read
 
 while (menuInput != "4"){
 
     MenuLogic(menuInput, rides, users, reservations, currentUser, userVal);
     Console.Clear();
-    menuInput = RunMenu(); 
+    menuInput = RunMenu(); //Update read
 }
 
 UserUtility.UpdateUserFile(users);
@@ -30,7 +30,7 @@ RideUtility.UpdateRideFile(rides);
 ReserveUtility.UpdateReservationFile(reservations);
 
 //***End Main
-//TODO label all methods
+
 //Gathers user menu selection
 static string RunMenu(){ 
     UserUtility.WriteLogo();
@@ -109,7 +109,7 @@ static void ManagerialMenu(Ride[] rides, User[] users, Reservation[] reservation
 
 //Directs program to respective reports
 static void ReportMenu(Reservation[] reservations){ 
-    int userInput = -1;
+    int userInput = -1; // Priming read
 
     while(userInput != 5){
         Console.Clear();
@@ -118,7 +118,7 @@ static void ReportMenu(Reservation[] reservations){
         System.Console.WriteLine("1. Most ridden ride\n2. Active reservations\n3. Rides Completed\n4. Top five rides\n5. Exit menu");
 
         try{
-            userInput = int.Parse(Console.ReadLine());
+            userInput = int.Parse(Console.ReadLine()); // Update read
         }
         catch{
             RideUtility.Error("Please enter a number");
@@ -145,7 +145,7 @@ static void ReportMenu(Reservation[] reservations){
 
 //Directs program to respective customer options
 static void CustomerMenu(User[] users, Ride[] rides, Reservation[] reservations, User currentUser, int userVal){
-    int userInput = -1;
+    int userInput = -1; // Priming read
 
     while(userInput != 6){
         Console.Clear();
@@ -158,7 +158,7 @@ static void CustomerMenu(User[] users, Ride[] rides, Reservation[] reservations,
 
         while(check == 0){
             try{
-                userInput = int.Parse(Console.ReadLine());
+                userInput = int.Parse(Console.ReadLine()); // update read
                 check = 1; //Update read
             }
             catch{
@@ -176,10 +176,10 @@ static void CustomerMenu(User[] users, Ride[] rides, Reservation[] reservations,
             ReserveUtility.RideHistory(reservations, currentUser);
         }
         else if(userInput == 4){
-            UserUtility.EditAccountInfo(users, currentUser, userVal); //Write method
+            UserUtility.EditAccountInfo(users, currentUser, userVal);
         }
         else if(userInput == 5){
-            ReserveUtility.CancelReservation(reservations, currentUser); //Edit date config
+            ReserveUtility.CancelReservation(reservations, currentUser);
         }
         else{
             if(userInput != 6){

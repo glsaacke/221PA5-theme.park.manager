@@ -7,7 +7,7 @@ namespace mis221_pa5_glsaacke
         private const int MAX_RESERVATIONS = 999;
         public ReserveUtility(){}
         
-        static public void GetAllReservations(Reservation[] reservations){
+        static public void GetAllReservations(Reservation[] reservations){ // Retrieves data from .txt file
             StreamReader inFile = new StreamReader("reservations.txt");
             int reservationCount = 0;
 
@@ -40,7 +40,7 @@ namespace mis221_pa5_glsaacke
         inFile.Close();
         }
 
-        static public void UpdateReservationFile(Reservation[] reservations){
+        static public void UpdateReservationFile(Reservation[] reservations){ // Exports data to .txt file
             StreamWriter outFile = new StreamWriter("reservations.txt", false);
 
             for(int i = 0; i < Reservation.reservationCount; i ++){
@@ -58,7 +58,7 @@ namespace mis221_pa5_glsaacke
             outFile.Close();
         }
 
-        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){
+        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){ // Creates a new reservation an adds it to array
             int check = 0;
             Console.Clear();
 
@@ -105,7 +105,7 @@ namespace mis221_pa5_glsaacke
 
         }
 
-        static public void RideHistory(Reservation[] reservations, User currentUser){
+        static public void RideHistory(Reservation[] reservations, User currentUser){ // Displays the current user's reservaiton history
             Console.Clear();
             string custEmail = currentUser.GetUserEmail();
             SortReservationArray(reservations);
@@ -132,7 +132,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void CancelReservation(Reservation[] reservations, User currentUser){
+        static public void CancelReservation(Reservation[] reservations, User currentUser){ // Toggles cancelled for a specified reservaiton
             Console.Clear();
             int check = 0;
 
@@ -181,7 +181,9 @@ namespace mis221_pa5_glsaacke
                     }
                 }
 
-                System.Console.WriteLine("Reservation sucessfully cancelled!"); //TODO text formatting
+                Console.ForegroundColor = ConsoleColor.Green;
+                System.Console.WriteLine("Reservation sucessfully cancelled!\n");
+                Console.ResetColor();
             }
                 
             
@@ -190,7 +192,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void SortReservationArray(Reservation[] reservations){
+        static public void SortReservationArray(Reservation[] reservations){ // Selection sort
             string rideName = reservations[0].GetRideName();
 
             for(int i = 0; i < Reservation.reservationCount; i++){
