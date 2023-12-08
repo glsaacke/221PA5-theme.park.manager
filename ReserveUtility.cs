@@ -4,7 +4,7 @@ namespace mis221_pa5_glsaacke
 {
     public class ReserveUtility
     {
-        private const int MAX_RESERVATIONS = 100;
+        private const int MAX_RESERVATIONS = 999;
         public ReserveUtility(){}
         
         static public void GetAllReservations(Reservation[] reservations){
@@ -92,7 +92,7 @@ namespace mis221_pa5_glsaacke
                     check = 1;
                 }
                 catch{
-                    RideUtility.Error("Error: invalid input. Please try again");
+                    RideUtility.Error("Invalid input. Please try again");
                 }
             }
             Reservation.reservationCount++;

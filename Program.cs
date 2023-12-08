@@ -47,7 +47,7 @@ static void MenuLogic(string menuInput, Ride[] rides, User[] users, Reservation[
         }
         else{
             System.Console.WriteLine();
-            RideUtility.Error("You do not have permission to acess this menu");
+            RideUtility.Error("You do not have permission to access this menu");
 
             System.Console.WriteLine("Press any key to return");
             Console.ReadKey();

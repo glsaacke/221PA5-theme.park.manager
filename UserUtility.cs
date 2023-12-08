@@ -5,7 +5,7 @@ namespace mis221_pa5_glsaacke
 {
     public class UserUtility
     {
-        static int userCount = 0;
+        static public int userCount = 0;
         private const int MAX_USERS = 999;
 
         public UserUtility(){}
@@ -140,7 +140,7 @@ namespace mis221_pa5_glsaacke
                     check = 1;
                 }
                 catch{
-                    RideUtility.Error("Error: Please enter a number from the above list");
+                    RideUtility.Error("Please enter a number from the above list");
                 }
             }
 
@@ -170,7 +170,7 @@ namespace mis221_pa5_glsaacke
                             check2 = 1;
                         }
                         catch{
-                            RideUtility.Error("Error: Please enter a number");
+                            RideUtility.Error("Please enter a number");
                         }
                     }
                 }

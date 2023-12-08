@@ -2,9 +2,6 @@ namespace mis221_pa5_glsaacke
 {
     public class RideReports
     {
-        private string rideName;
-        private string rideType;//TODO add time gap to "..." for all reports
-
         static public void MostRiddenRide(Reservation[] reservations){ //Returns the most ridden ride //FIXME edit line spacing
             Console.Clear();
             System.Console.Write("Calculating the most ridden ride");

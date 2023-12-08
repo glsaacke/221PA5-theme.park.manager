@@ -6,7 +6,7 @@ namespace mis221_pa5_glsaacke
 {
     public class RideUtility
     {
-        private const int MAX_RIDES = 99;
+        private const int MAX_RIDES = 999;
 
         public RideUtility(){
 
@@ -211,7 +211,7 @@ namespace mis221_pa5_glsaacke
 
             foreach(Ride r in rides){
                 if(r != null){
-                    if(r.GetOperational()){
+                    if(r.GetOperational() && r.GetDeleted() == false){
                         System.Console.WriteLine($"{r.GetRideName()}, a {r.GetRideType()} ride");
                     }
                 }
