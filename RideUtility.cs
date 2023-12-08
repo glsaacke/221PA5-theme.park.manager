@@ -41,9 +41,14 @@ namespace mis221_pa5_glsaacke
                 }
                 //Update read in while condition
             }
-        inFile.Close();
-        Ride.rideCount = rideCount;
-        Ride.maxID = rideCount - 1;
+            inFile.Close();
+            Ride.rideCount = rideCount;
+            if(rideCount > 0){
+                Ride.maxID = rideCount -1;
+            }
+            else{
+                Ride.maxID = rideCount;
+            }
         }
 
         static public void UpdateRideFile(Ride[] rides){ //FIXME index creation error: starts at -1
@@ -77,19 +82,19 @@ namespace mis221_pa5_glsaacke
 
             Ride ride = new Ride();
 
-            Ride myRide = new Ride(ride.GetMaxID(), inputName.ToUpper(), inputType.ToUpper(), true, false);
+            Ride myRide = new Ride(Ride.GetMaxID(), inputName.ToUpper(), inputType.ToUpper(), true, false);
 
-            ride.IncrementMaxID();
+            Ride.IncrementMaxID();
             rides[Ride.maxID] = myRide;
 
             Console.ForegroundColor = ConsoleColor.Green;
-            System.Console.WriteLine("New ride added!");
+            System.Console.WriteLine("\nNew ride added!\n");
             Console.ResetColor();
             System.Console.WriteLine("Press any key to continue");
             Console.ReadKey();
         }
 
-        static public void RemoveRide(Ride[] rides){
+        static public void RemoveRide(Ride[] rides){ //FIXME index out of bounds when removing a recently added ride
             Console.Clear();
 
             System.Console.WriteLine("Enter the name of the ride you would like to remove");
@@ -97,7 +102,7 @@ namespace mis221_pa5_glsaacke
 
             int foundIndex = FindRide(inputRide, rides);
 
-            if(foundIndex == -1){
+            if(foundIndex == -2){
                 Error("Ride does not exist");
             }
             else{
@@ -108,7 +113,7 @@ namespace mis221_pa5_glsaacke
             Console.ReadKey();
         }
 
-        static public void EditRide(Ride[] rides){
+        static public void EditRide(Ride[] rides){ //FIXME does not edit a recently added ride
             Console.Clear();
             System.Console.WriteLine("Enter the name of the ride you would like to edit");
             string inputName = Console.ReadLine().ToUpper();
@@ -116,7 +121,7 @@ namespace mis221_pa5_glsaacke
             int foundIndex = FindRide(inputName, rides);
 
             if(foundIndex != -2){
-                System.Console.WriteLine("Select which aspect of " + inputName + " you would like to change");
+                System.Console.WriteLine("\nSelect which aspect of " + inputName + " you would like to change");
                 System.Console.WriteLine("1. Ride name\n2. Ride Type\n3. Ride operating status");
                 int userInput = -1;
 
@@ -130,12 +135,16 @@ namespace mis221_pa5_glsaacke
                 if(userInput == 1){
                     System.Console.WriteLine("Enter the new ride name");
                     rides[foundIndex].SetRideName(Console.ReadLine().ToUpper());
-                    System.Console.WriteLine("Ride name has been changed");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    System.Console.WriteLine("\nRide name has been changed");
+                    Console.ResetColor();
                 }
                 else if( userInput == 2){
                     System.Console.WriteLine("Enter the new ride type");
                     rides[foundIndex].SetRideType(Console.ReadLine().ToUpper());
-                    System.Console.WriteLine("Ride type has been changed");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    System.Console.WriteLine("\nRide type has been changed");
+                    Console.ResetColor();
                 }
                 else if(userInput == 3){
                     rides[foundIndex].ToggleOperational();
@@ -164,7 +173,7 @@ namespace mis221_pa5_glsaacke
 
             Ride ride = new Ride();
 
-            for(int i = 0; i < Ride.rideCount; i ++){
+            for(int i = 0; i <= Ride.maxID; i ++){
 
                 if(rides[i].GetRideName() == inputRide){
                     foundIndex = i;
@@ -175,10 +184,10 @@ namespace mis221_pa5_glsaacke
 
         static private void SortRideArray(Ride[] rides){
 
-            for(int i = 0; i < Ride.rideCount; i++){
+            for(int i = 0; i <= Ride.maxID; i++){
                 int index = i;
 
-                for(int j = i + 1; j < Ride.rideCount; j++){
+                for(int j = i + 1; j <= Ride.maxID; j++){
                     if(string.Compare(rides[j].GetRideName(), rides[i].GetRideName()) < 0){
                         index = j;
                     }
@@ -194,7 +203,8 @@ namespace mis221_pa5_glsaacke
 
         static public void ViewAllRides(Ride[] rides){
             Console.Clear();
-            System.Console.WriteLine("Here are the current operational rides\n");
+            System.Console.WriteLine("Here are the current operational rides:\n");
+            System.Console.WriteLine("─────────────────────────────────────────────────────────────");
             SortRideArray(rides);
             string currentRide = rides[0].GetRideName();
 
@@ -205,6 +215,7 @@ namespace mis221_pa5_glsaacke
                     }
                 }
             }
+            System.Console.WriteLine("─────────────────────────────────────────────────────────────");
             System.Console.WriteLine("\nPress any key to continue");
             Console.ReadKey();
         }

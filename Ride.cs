@@ -63,10 +63,10 @@ namespace mis221_pa5_glsaacke
         }
         
 
-        public int GetMaxID(){
+        static public int GetMaxID(){
             return maxID;
         }
-        public void IncrementMaxID(){
+        static public void IncrementMaxID(){
             maxID ++;
         }
     }

@@ -42,7 +42,7 @@ namespace mis221_pa5_glsaacke
                 AddUser(users, userFirstName, userLastName);
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Blue;
-                System.Console.WriteLine("New user: " + userFirstName + userLastName + "\nUser added to system!");
+                System.Console.WriteLine("New user: " + userFirstName + " " + userLastName + "\nUser added to system!");
                 Console.ResetColor();
             }
 
@@ -91,7 +91,10 @@ namespace mis221_pa5_glsaacke
 
         static private void AddUser(User[] users, string userFirstName, string userLastName){ //Adds a new user to the array
             User temp = new User();
-            System.Console.WriteLine("Welcome new user!");
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            System.Console.WriteLine("Welcome new user!\n");
+            Console.ResetColor();
             System.Console.WriteLine("Please enter your email");
             string userEmail = Console.ReadLine();
             System.Console.WriteLine("Please enter your age");
@@ -118,7 +121,8 @@ namespace mis221_pa5_glsaacke
 
         static public void EditAccountInfo(User[] users, User currentUser, int userVal){
             Console.Clear();
-            System.Console.WriteLine("Welcome to the account edit interface. Select what you would like to change\n1. Email\n2. First name\n3. Last name\n4. Age\n5. Return");
+            System.Console.WriteLine("Welcome to the account edit interface");
+            System.Console.WriteLine("\nSelect what you would like to change:1\n1. Email\n2. First name\n3. Last name\n4. Age\n5. Return");
             int check = 0;
             int userInput = -1;
 
@@ -134,18 +138,22 @@ namespace mis221_pa5_glsaacke
 
             if(userInput != 5){
                 if(userInput == 1){
+                    Console.Clear();
                     System.Console.WriteLine("Enter your updated email");
                     users[userVal].SetUserEmail(Console.ReadLine());
                 }
                 else if(userInput == 2){
+                    Console.Clear();
                     System.Console.WriteLine("Enter your updated first name");
                     users[userVal].SetFirstName(Console.ReadLine());
                 }
                 else if(userInput == 3){
+                    Console.Clear();
                     System.Console.WriteLine("Enter your updated last name");
                     users[userVal].SetLastName(Console.ReadLine());
                 }
                 else if(userInput == 4){
+                    Console.Clear();
                     System.Console.WriteLine("Enter your updated age");
                     int check2 = 0;
                     while(check2 == 0){
@@ -163,7 +171,9 @@ namespace mis221_pa5_glsaacke
                         RideUtility.Error("Please enter a number from the above list");
                     }
                 }
-                System.Console.WriteLine("User information updated!");
+                Console.ForegroundColor = ConsoleColor.Green;
+                System.Console.WriteLine("\nUser information updated!\n");
+                Console.ResetColor();
             }
             System.Console.WriteLine("Press any key to continue");
             Console.ReadKey();
@@ -179,6 +189,15 @@ namespace mis221_pa5_glsaacke
                 }
             }
             outFile.Close();
+        }
+
+        static public void WriteLogo(){
+            System.Console.WriteLine(@"   _______          _       __      __            ____             __  ");
+            System.Console.WriteLine(@"  / ____( )_____   | |     / /___ _/ /____  _____/ __ \____ ______/ /__");
+            System.Console.WriteLine(@" / / __ |// ___/   | | /| / / __ `/ __/ _ \/ ___/ /_/ / __ `/ ___/ //_/");
+            System.Console.WriteLine(@"/ /_/ /  (__  )    | |/ |/ / /_/ / /_/  __/ /  / ____/ /_/ / /  / ,<   ");
+            System.Console.WriteLine(@"\____/  /____/     |__/|__/\__,_/\__/\___/_/  /_/    \__,_/_/  /_/|_|  ");
+            System.Console.WriteLine(@"                                                                       ");
         }
     }
 }

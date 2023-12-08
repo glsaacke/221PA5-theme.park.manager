@@ -33,6 +33,7 @@ ReserveUtility.UpdateReservationFile(reservations);
 //TODO label all methods
 //Gathers user menu selection
 static string RunMenu(){ //TODO create word art for waterpark 
+    UserUtility.WriteLogo();
     System.Console.WriteLine("Please select an option from the menu below:\n1. Managerial Functions\n2. Customer Functions\n3. Exit");
     string userInput = Console.ReadLine();
     return userInput;
@@ -58,7 +59,10 @@ static void ManagerialMenu(Ride[] rides, User[] users, Reservation[] reservation
     int userInput = -1;
     while(userInput != 5){
         Console.Clear();
-        System.Console.WriteLine("You are now in the managerial functions menu. Please select an option below:");
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        System.Console.WriteLine("You are now in the managerial functions menu");
+        Console.ResetColor();
+        System.Console.WriteLine("\nPlease select an option below:\n");
         System.Console.WriteLine("1. Add a new ride to park inventory\n2. Remove a ride from park inventory\n3. Edit information about a ride\n4. Access report menu\n5. Return to home menu");
         int check = 0; //Priming read
 
@@ -96,7 +100,8 @@ static void ReportMenu(Reservation[] reservations){
 
     while(userInput != 5){
         Console.Clear();
-        System.Console.WriteLine("Please choose from the reports below");
+        System.Console.WriteLine("You are now in the REPORTS menu");
+        System.Console.WriteLine("\nPlease choose from the reports below");
         System.Console.WriteLine("1. Most ridden ride\n2. Active reservations\n3. Rides Completed\n4. Top five rides\n5. Exit menu");
 
         try{
@@ -131,7 +136,10 @@ static void CustomerMenu(User[] users, Ride[] rides, Reservation[] reservations,
 
     while(userInput != 6){
         Console.Clear();
-        System.Console.WriteLine("You are now in the customer interface menu. Please select an option below");
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        System.Console.WriteLine("You are now in the customer interface menu");
+        Console.ResetColor();
+        System.Console.WriteLine("\nPlease select an option from below:");
         System.Console.WriteLine("1. View all operational rides\n2. Reserve a ride\n3. View ride history\n4. Update user account information\n5. Cancel a reservation\n6. Return to home menu");
         int check = 0; //Priming read
 

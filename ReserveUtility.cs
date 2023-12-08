@@ -58,7 +58,7 @@ namespace mis221_pa5_glsaacke
             outFile.Close();
         }
 
-        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){ //FIXME IDs are assigned incorrectly
+        static public void ReserveRide(Ride[] rides, Reservation[] reservations, User currentUser){
             int check = 0;
             Console.Clear();
 
@@ -96,19 +96,24 @@ namespace mis221_pa5_glsaacke
                 }
             }
             Reservation.reservationCount++;
+            Console.ForegroundColor = ConsoleColor.Green;
             System.Console.WriteLine("Ride reserved!");
-            System.Console.WriteLine("Press any key to continue");
+            Console.ResetColor();
+            System.Console.WriteLine("\nPress any key to continue");
             Console.ReadKey();
 
 
         }
 
         static public void RideHistory(Reservation[] reservations, User currentUser){
+            Console.Clear();
             string custEmail = currentUser.GetUserEmail();
             SortReservationArray(reservations);
             int count = 0;
 
             System.Console.WriteLine("Here are the past reservations under your email: " + custEmail);
+            System.Console.WriteLine();
+            System.Console.WriteLine("─────────────────────────────────────────────────────────────");
 
             foreach(Reservation r in reservations){
                 if(r != null){
@@ -120,9 +125,9 @@ namespace mis221_pa5_glsaacke
             }
 
             if(count == 0){
-                System.Console.WriteLine("\nYou have no past reservations");
+                System.Console.WriteLine("You have no past reservations");
             }
-
+            System.Console.WriteLine("─────────────────────────────────────────────────────────────");
             System.Console.WriteLine("\nPress any key to continue");
             Console.ReadKey();
         }
@@ -137,10 +142,11 @@ namespace mis221_pa5_glsaacke
             int check3 = 0;
             string reservationIndex = "";
 
+            System.Console.WriteLine("\n─────────────────────────────────────────────────────────────");
             for(int i = 0; i < Reservation.reservationCount; i++){
                 if(rideInput == reservations[i].GetRideName() && reservations[i].GetCustEmail() == currentUser.GetUserEmail() && reservations[i].GetReservationDate() > DateTime.Now){
-                    System.Console.WriteLine($"{i}. {rideInput} reservation on {reservations[i].GetReservationDate().ToString("MM/dd/yyyy HH:mm")}");
-                    indexConcat += $"{i},";                    
+                    System.Console.WriteLine($"{reservations[i].GetInteractionID()}. {rideInput} reservation on {reservations[i].GetReservationDate().ToString("MM/dd/yyyy HH:mm")}");
+                    indexConcat += $"{reservations[i].GetInteractionID()},";                    
                 }
             }
 
@@ -150,7 +156,7 @@ namespace mis221_pa5_glsaacke
             }
 
             string[] options = indexConcat.Split(',');
-
+            System.Console.WriteLine("─────────────────────────────────────────────────────────────");
             if(check == 0){
                 System.Console.WriteLine("\nPlease enter the number of the reservation you would like to cancel");
 
@@ -168,10 +174,14 @@ namespace mis221_pa5_glsaacke
                         RideUtility.Error("Error: Please enter a number from the above results");
                     }
                 }
-            
-                reservations[int.Parse(reservationIndex)].ToggleCancelled();
 
-                System.Console.WriteLine("Reservation sucessfully cancelled!");
+                for(int i = 0; i < Reservation.reservationCount; i++){
+                    if(reservations[i].GetInteractionID() == int.Parse(reservationIndex)){
+                        reservations[i].ToggleCancelled();
+                    }
+                }
+
+                System.Console.WriteLine("Reservation sucessfully cancelled!"); //TODO text formatting
             }
                 
             

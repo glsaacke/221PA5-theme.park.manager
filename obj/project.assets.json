@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Gavin S\\.nuget\\packages\\": {}
+    "C:\\Users\\gavin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\Coding Materials\\GitHub\\GitHub_Practice\\mis221-pa5-glsaacke\\mis221-pa5-glsaacke.csproj",
+      "projectUniqueName": "C:\\Users\\gavin\\Documents\\GitHub\\mis221-pa5-glsaacke\\mis221-pa5-glsaacke.csproj",
       "projectName": "mis221-pa5-glsaacke",
-      "projectPath": "H:\\Coding Materials\\GitHub\\GitHub_Practice\\mis221-pa5-glsaacke\\mis221-pa5-glsaacke.csproj",
-      "packagesPath": "C:\\Users\\Gavin S\\.nuget\\packages\\",
-      "outputPath": "H:\\Coding Materials\\GitHub\\GitHub_Practice\\mis221-pa5-glsaacke\\obj\\",
+      "projectPath": "C:\\Users\\gavin\\Documents\\GitHub\\mis221-pa5-glsaacke\\mis221-pa5-glsaacke.csproj",
+      "packagesPath": "C:\\Users\\gavin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gavin\\Documents\\GitHub\\mis221-pa5-glsaacke\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Gavin S\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\gavin\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
